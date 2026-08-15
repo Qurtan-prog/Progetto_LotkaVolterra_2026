@@ -1,4 +1,4 @@
-#include "Simulation.hpp"
+#include "simulation.hpp"
 
 #include <cassert>
 #include <cmath>
