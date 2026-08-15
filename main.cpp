@@ -3,6 +3,8 @@
 #include <fstream>
 #include <iostream>
 
+using lotka_volterra::Simulation;
+
 int main()
 {
     double x0;
@@ -42,7 +44,7 @@ int main()
     for (std::size_t i{0}; i < sim.size(); ++i)
     {
         double const t{i * dt};
-        out << t << ' ' << sim.x(i) << ' ' << sim.y(i) << ' ' << sim.H(i) << '\n';
+        out << t << '  ' << sim.x(i) << '  ' << sim.y(i) << '  ' << sim.H(i) << '\n';
     }
 
     std::cout << "Simulazione completata: " << sim.size()
