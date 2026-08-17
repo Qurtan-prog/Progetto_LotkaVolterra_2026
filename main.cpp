@@ -79,7 +79,7 @@ int main()
         Series const hSeries{"H(t)", h_values, sf::Color(0, 150, 0)};
 
         Plotter plotter;
-        plotter.show(time, populationSeries, hSeries);
+        plotter.showWithOrbit(time, populationSeries, hSeries, x_values, y_values);
     }
     catch (std::exception const &error)
     {

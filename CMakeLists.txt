@@ -6,6 +6,7 @@ set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(SFML 2.6 COMPONENTS graphics window system REQUIRED)
+find_package(Threads REQUIRED)
 
 add_executable(lotka_volterra
     main.cpp
@@ -15,4 +16,4 @@ add_executable(lotka_volterra
 )
 
 target_include_directories(lotka_volterra PRIVATE include)
-target_link_libraries(lotka_volterra PRIVATE sfml-graphics sfml-window sfml-system)
+target_link_libraries(lotka_volterra PRIVATE sfml-graphics sfml-window sfml-system Threads::Threads)
