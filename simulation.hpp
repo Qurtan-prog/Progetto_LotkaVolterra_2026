@@ -1,7 +1,7 @@
+#include <vector>
+
 #ifndef SIMULATION_HPP
 #define SIMULATION_HPP
-
-#include <vector>
 
 namespace lotka_volterra
 {

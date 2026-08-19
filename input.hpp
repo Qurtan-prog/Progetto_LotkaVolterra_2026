@@ -4,11 +4,11 @@ Se queste funzioni stessero dentro main.cpp, simulation_test.cpp non potrebbe in
 senza portarsi dietro anche int main() di main.cpp — e avresti due main in conflitto
 quando compili i test (uno vero, uno generato da Doctest).*/
 
-#ifndef PARAMETERS_HPP
-#define PARAMETERS_HPP
-
 #include <istream>
 #include <string>
+
+#ifndef INPUT_HPP
+#define INPUT_HPP
 
 namespace lotka_volterra
 {

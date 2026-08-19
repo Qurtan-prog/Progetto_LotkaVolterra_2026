@@ -1,3 +1,5 @@
+// PER COMPIPLARE: g++ -std=c++20 -Wall -Wextra simulation.cpp input.cpp main.cpp -o lotka_volterra
+
 #include "simulation.hpp"
 #include "input.hpp"
 
