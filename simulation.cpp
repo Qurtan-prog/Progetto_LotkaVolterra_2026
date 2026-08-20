@@ -1,16 +1,21 @@
 #include "simulation.hpp"
 
-#include <cassert>
 #include <cmath>
+#include <stdexcept>
 
 namespace lotka_volterra
 {
-  Simulation::Simulation(double x0, double y0,
-                         double A, double B, double C, double D,
-                         double dt)
-      : A_(A), B_(B), C_(C), D_(D), dt_(dt),
-        x_eq_(D / C), y_eq_(A / B)
+
+  Simulation::Simulation(Parameters const &params, double x0, double y0, double dt)
+      : params_(params), dt_(dt),
+        x_eq_(params.D / params.C), y_eq_(params.A / params.B)
   {
+    if (x0 <= 0.0 || y0 <= 0.0 || params.A <= 0.0 || params.B <= 0.0 || params.C <= 0.0 || params.D <= 0.0 || dt <= 0.0)
+    {
+      throw std::invalid_argument(
+          "Simulation: All parameters have to be positive");
+    }
+
     double const x0_rel{x0 / x_eq_};
     double const y0_rel{y0 / y_eq_};
 
@@ -24,9 +29,10 @@ namespace lotka_volterra
     double const x_prev{x_rel_.back()};
     double const y_prev{y_rel_.back()};
 
-    //Usiamo il metodo di integrazione Eulero simplettico
-    double const y_new{y_prev + D_ * (x_prev - 1.0) * y_prev * dt_};
-    double const x_new{x_prev + A_ * (1.0 - y_new) * x_prev * dt_};
+    // Eulero simplettico: y aggiornata prima, usando ancora x_prev;
+    // x aggiornata dopo, usando gia' il nuovo valore di y.
+    double const y_new{y_prev + params_.D * (x_prev - 1.0) * y_prev * dt_};
+    double const x_new{x_prev + params_.A * (1.0 - y_new) * x_prev * dt_};
 
     x_rel_.push_back(x_new);
     y_rel_.push_back(y_new);
@@ -41,26 +47,23 @@ namespace lotka_volterra
     return x_rel_.size();
   }
 
-  double Simulation::x(std::size_t i) const
+  State Simulation::state(std::size_t i) const
   {
-    assert(i < x_rel_.size());
-    return x_rel_[i] * x_eq_;
+    if (i >= x_rel_.size())
+    {
+      throw std::out_of_range("Simulation::state: index out of range");
+    }
+    return State{x_rel_[i] * x_eq_, y_rel_[i] * y_eq_, H_[i]};
   }
 
-  double Simulation::y(std::size_t i) const
+  Parameters const &Simulation::parameters() const
   {
-    assert(i < y_rel_.size());
-    return y_rel_[i] * y_eq_;
-  }
-
-  double Simulation::H(std::size_t i) const
-  {
-    assert(i < H_.size());
-    return H_[i];
+    return params_;
   }
 
   double Simulation::compute_H(double x_abs, double y_abs) const
   {
-    return -D_ * std::log(x_abs) + C_ * x_abs + B_ * y_abs - A_ * std::log(y_abs);
+    return -params_.D * std::log(x_abs) + params_.C * x_abs + params_.B * y_abs - params_.A * std::log(y_abs);
   }
-}
+
+} // namespace lotka_volterra
