@@ -8,12 +8,12 @@ double read_positive_double(std::istream& in, std::string const& name)
 {
   double value;
   if (!(in >> value)) {
-    throw std::runtime_error("not accepted value for " + name
-                              + ": write a number");
+    throw std::runtime_error("invalid value for " + name
+                              + ": expected a number");
   }
   if (value <= 0.0) {
-    throw std::runtime_error("not accepted value for " + name
-                              + ": write positive number");
+    throw std::runtime_error("invalid value for " + name
+                              + ": must be greater than zero");
   }
   return value;
 }
@@ -22,14 +22,14 @@ int read_positive_int(std::istream& in, std::string const& name)
 {
   int value;
   if (!(in >> value)) {
-    throw std::runtime_error("not accepted value for " + name
-                              + ": write an integer number");
+    throw std::runtime_error("invalid value for " + name
+                              + ": expected an integer");
   }
   if (value <= 0) {
-    throw std::runtime_error("not accepted value for " + name
-                              + " write positive number");
+    throw std::runtime_error("invalid value for " + name
+                              + ": must be greater than zero");
   }
   return value;
 }
 
-} 
+} // namespace lotka_volterra
