@@ -1,4 +1,3 @@
-//PER COMPILARE:   g++ -std=c++20 -Wall -Wextra input.cpp simulation.cpp simulation_test.cpp -o test_parameters
 
 #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
 #include "doctest.h"
