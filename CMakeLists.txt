@@ -11,7 +11,9 @@ find_package(Threads REQUIRED)
 add_executable(lotka_volterra
     main.cpp
     simulation.cpp
+    PlotAxes.cpp
     Plotter.cpp
+    OrbitPlotter.cpp
     input.cpp
 )
 

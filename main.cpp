@@ -1,13 +1,16 @@
 #include "simulation.hpp"
 #include "input.hpp"
 #include "Plotter.hpp"
+#include "OrbitPlotter.hpp"
 
 #include <cstdlib>
 #include <fstream>
 #include <iostream>
 #include <stdexcept>
+#include <thread>
 #include <vector>
 
+using lotka_volterra::OrbitPlotter;
 using lotka_volterra::Parameters;
 using lotka_volterra::Plotter;
 using lotka_volterra::read_positive_double;
@@ -47,7 +50,7 @@ int main()
 
         std::ofstream out{"output.txt"};
 
-        // Dati da passare sia al file di output sia al Plotter
+        // Dati da passare sia al file di output sia ai Plotter
         std::vector<double> time;
         std::vector<double> x_values;
         std::vector<double> y_values;
@@ -72,14 +75,29 @@ int main()
         std::cout << "Simulazione completata: " << sim.size()
                   << " stati scritti in output.txt\n";
 
-        // Costruzione delle serie e apertura della finestra grafica
+        // Costruzione delle serie e apertura delle finestre grafiche.
         std::vector<Series> populationSeries{
             Series{"Prede x(t)", x_values, sf::Color::Blue},
             Series{"Predatori y(t)", y_values, sf::Color::Red}};
         Series const hSeries{"H(t)", h_values, sf::Color(0, 150, 0)};
 
+        // L'orbita gira su un thread dedicato, con la propria finestra e
+        // il proprio contesto OpenGL creati al suo interno (vedi
+        // OrbitPlotter::show). x_values e y_values sono catturati per
+        // riferimento: e' sicuro perche' aspettiamo la fine del thread
+        // (join) prima di uscire da main, quindi i vettori restano
+        // validi per tutta la vita del thread.
+        std::thread orbitThread(&OrbitPlotter::show, std::cref(x_values), std::cref(y_values));
+
+        // La finestra principale (popolazioni + H) gira sul thread
+        // chiamante.
         Plotter plotter;
-        plotter.showWithOrbit(time, populationSeries, hSeries, x_values, y_values);
+        plotter.show(time, populationSeries, hSeries);
+
+        // A questo punto la finestra principale e' stata chiusa, ma
+        // quella dell'orbita potrebbe essere ancora aperta: aspettiamo
+        // che l'utente la chiuda prima di terminare il programma.
+        orbitThread.join();
     }
     catch (std::exception const &error)
     {
