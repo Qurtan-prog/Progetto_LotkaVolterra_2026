@@ -8,12 +8,12 @@ double read_positive_double(std::istream& in, std::string const& name)
 {
   double value;
   if (!(in >> value)) {
-    throw std::runtime_error("valore non valido per " + name
-                              + ": atteso un numero");
+    throw std::runtime_error("not accepted value for " + name
+                              + ": write a number");
   }
   if (value <= 0.0) {
-    throw std::runtime_error("valore non valido per " + name
-                              + ": deve essere maggiore di zero");
+    throw std::runtime_error("not accepted value for " + name
+                              + ": write positive number");
   }
   return value;
 }
@@ -22,12 +22,12 @@ int read_positive_int(std::istream& in, std::string const& name)
 {
   int value;
   if (!(in >> value)) {
-    throw std::runtime_error("valore non valido per " + name
-                              + ": atteso un numero intero");
+    throw std::runtime_error("not accepted value for " + name
+                              + ": write an integer number");
   }
   if (value <= 0) {
-    throw std::runtime_error("valore non valido per " + name
-                              + ": deve essere maggiore di zero");
+    throw std::runtime_error("not accepted value for " + name
+                              + " write positive number");
   }
   return value;
 }
