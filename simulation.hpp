@@ -1,8 +1,16 @@
+<<<<<<< HEAD
 #include <vector>
 
 #ifndef SIMULATION_HPP
 #define SIMULATION_HPP
 
+=======
+#ifndef SIMULATION_HPP
+#define SIMULATION_HPP
+
+#include <vector>
+
+>>>>>>> artan-branch
 namespace lotka_volterra
 {
 
