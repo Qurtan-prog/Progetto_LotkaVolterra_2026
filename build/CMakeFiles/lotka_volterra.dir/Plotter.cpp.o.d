@@ -250,41 +250,5 @@ CMakeFiles/lotka_volterra.dir/Plotter.cpp.o: \
  /usr/include/SFML/Graphics/Glsl.hpp /usr/include/SFML/Graphics/Glsl.inl \
  /usr/include/SFML/Graphics/Sprite.hpp \
  /usr/include/SFML/Graphics/Text.hpp \
- /usr/include/SFML/Graphics/VertexBuffer.hpp /usr/include/c++/14/iomanip \
- /usr/include/c++/14/bits/quoted_string.h /usr/include/c++/14/sstream \
- /usr/include/c++/14/istream /usr/include/c++/14/bits/istream.tcc \
- /usr/include/c++/14/bits/sstream.tcc /usr/include/c++/14/thread \
- /usr/include/c++/14/stop_token /usr/include/c++/14/atomic \
- /usr/include/c++/14/bits/atomic_base.h \
- /usr/include/c++/14/bits/atomic_lockfree_defines.h \
- /usr/include/c++/14/bits/atomic_wait.h /usr/include/c++/14/cstdint \
- /usr/include/c++/14/climits \
- /usr/lib/gcc/x86_64-linux-gnu/14/include/limits.h \
- /usr/lib/gcc/x86_64-linux-gnu/14/include/syslimits.h \
- /usr/include/limits.h /usr/include/x86_64-linux-gnu/bits/posix1_lim.h \
- /usr/include/x86_64-linux-gnu/bits/local_lim.h \
- /usr/include/linux/limits.h \
- /usr/include/x86_64-linux-gnu/bits/posix2_lim.h \
- /usr/include/x86_64-linux-gnu/bits/xopen_lim.h \
- /usr/include/x86_64-linux-gnu/bits/uio_lim.h /usr/include/unistd.h \
- /usr/include/x86_64-linux-gnu/bits/posix_opt.h \
- /usr/include/x86_64-linux-gnu/bits/environments.h \
- /usr/include/x86_64-linux-gnu/bits/confname.h \
- /usr/include/x86_64-linux-gnu/bits/getopt_posix.h \
- /usr/include/x86_64-linux-gnu/bits/getopt_core.h \
- /usr/include/x86_64-linux-gnu/bits/unistd_ext.h \
- /usr/include/linux/close_range.h /usr/include/syscall.h \
- /usr/include/x86_64-linux-gnu/sys/syscall.h \
- /usr/lib/linux/uapi/x86/asm/unistd.h \
- /usr/lib/linux/uapi/x86/asm/unistd_64.h \
- /usr/include/x86_64-linux-gnu/bits/syscall.h \
- /usr/include/c++/14/bits/std_mutex.h \
- /usr/include/c++/14/bits/std_thread.h \
- /usr/include/c++/14/bits/unique_ptr.h /usr/include/c++/14/semaphore \
- /usr/include/c++/14/bits/semaphore_base.h \
- /usr/include/c++/14/bits/chrono.h /usr/include/c++/14/ratio \
- /usr/include/c++/14/limits /usr/include/c++/14/bits/parse_numbers.h \
- /usr/include/c++/14/bits/atomic_timed_wait.h \
- /usr/include/c++/14/bits/this_thread_sleep.h \
- /usr/include/x86_64-linux-gnu/sys/time.h /usr/include/semaphore.h \
- /usr/include/x86_64-linux-gnu/bits/semaphore.h
+ /usr/include/SFML/Graphics/VertexBuffer.hpp \
+ /home/artan/Progetto_prog/PlotAxes.hpp

@@ -4,22 +4,21 @@ Se queste funzioni stessero dentro main.cpp, simulation_test.cpp non potrebbe in
 senza portarsi dietro anche int main() di main.cpp — e avresti due main in conflitto
 quando compili i test (uno vero, uno generato da Doctest).*/
 
-#ifndef PARAMETERS_HPP
-#define PARAMETERS_HPP
+#ifndef INPUT_HPP
+#define INPUT_HPP
 
 #include <istream>
 #include <string>
 
-namespace lotka_volterra
-{
+namespace lotka_volterra {
 
-    // Legge da 'in' un numero (double) associato al parametro 'name'.
-    // Lancia std::runtime_error se il valore non e' leggibile come double,
-    // o se non e' strettamente positivo.
-    double read_positive_double(std::istream &in, std::string const &name);
+// Reads a double from 'in', associated with the parameter 'name'.
+// Throws std::runtime_error if the value cannot be read as a double,
+// or if it is not strictly positive.
+double read_positive_double(std::istream& in, std::string const& name);
 
-    // Come sopra, ma per un intero strettamente positivo.
-    int read_positive_int(std::istream &in, std::string const &name);
+// Same as above, but for a strictly positive integer.
+int read_positive_int(std::istream& in, std::string const& name);
 
 } // namespace lotka_volterra
 

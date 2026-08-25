@@ -100,10 +100,24 @@ CMakeFiles/lotka_volterra.dir/simulation.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/lotka_volterra.dir/simulation.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/artan/Progetto_prog/simulation.cpp -o CMakeFiles/lotka_volterra.dir/simulation.cpp.s
 
+CMakeFiles/lotka_volterra.dir/PlotAxes.cpp.o: CMakeFiles/lotka_volterra.dir/flags.make
+CMakeFiles/lotka_volterra.dir/PlotAxes.cpp.o: /home/artan/Progetto_prog/PlotAxes.cpp
+CMakeFiles/lotka_volterra.dir/PlotAxes.cpp.o: CMakeFiles/lotka_volterra.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/artan/Progetto_prog/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/lotka_volterra.dir/PlotAxes.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/lotka_volterra.dir/PlotAxes.cpp.o -MF CMakeFiles/lotka_volterra.dir/PlotAxes.cpp.o.d -o CMakeFiles/lotka_volterra.dir/PlotAxes.cpp.o -c /home/artan/Progetto_prog/PlotAxes.cpp
+
+CMakeFiles/lotka_volterra.dir/PlotAxes.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/lotka_volterra.dir/PlotAxes.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/artan/Progetto_prog/PlotAxes.cpp > CMakeFiles/lotka_volterra.dir/PlotAxes.cpp.i
+
+CMakeFiles/lotka_volterra.dir/PlotAxes.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/lotka_volterra.dir/PlotAxes.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/artan/Progetto_prog/PlotAxes.cpp -o CMakeFiles/lotka_volterra.dir/PlotAxes.cpp.s
+
 CMakeFiles/lotka_volterra.dir/Plotter.cpp.o: CMakeFiles/lotka_volterra.dir/flags.make
 CMakeFiles/lotka_volterra.dir/Plotter.cpp.o: /home/artan/Progetto_prog/Plotter.cpp
 CMakeFiles/lotka_volterra.dir/Plotter.cpp.o: CMakeFiles/lotka_volterra.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/artan/Progetto_prog/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/lotka_volterra.dir/Plotter.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/artan/Progetto_prog/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/lotka_volterra.dir/Plotter.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/lotka_volterra.dir/Plotter.cpp.o -MF CMakeFiles/lotka_volterra.dir/Plotter.cpp.o.d -o CMakeFiles/lotka_volterra.dir/Plotter.cpp.o -c /home/artan/Progetto_prog/Plotter.cpp
 
 CMakeFiles/lotka_volterra.dir/Plotter.cpp.i: cmake_force
@@ -114,10 +128,24 @@ CMakeFiles/lotka_volterra.dir/Plotter.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/lotka_volterra.dir/Plotter.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/artan/Progetto_prog/Plotter.cpp -o CMakeFiles/lotka_volterra.dir/Plotter.cpp.s
 
+CMakeFiles/lotka_volterra.dir/OrbitPlotter.cpp.o: CMakeFiles/lotka_volterra.dir/flags.make
+CMakeFiles/lotka_volterra.dir/OrbitPlotter.cpp.o: /home/artan/Progetto_prog/OrbitPlotter.cpp
+CMakeFiles/lotka_volterra.dir/OrbitPlotter.cpp.o: CMakeFiles/lotka_volterra.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/artan/Progetto_prog/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/lotka_volterra.dir/OrbitPlotter.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/lotka_volterra.dir/OrbitPlotter.cpp.o -MF CMakeFiles/lotka_volterra.dir/OrbitPlotter.cpp.o.d -o CMakeFiles/lotka_volterra.dir/OrbitPlotter.cpp.o -c /home/artan/Progetto_prog/OrbitPlotter.cpp
+
+CMakeFiles/lotka_volterra.dir/OrbitPlotter.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/lotka_volterra.dir/OrbitPlotter.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/artan/Progetto_prog/OrbitPlotter.cpp > CMakeFiles/lotka_volterra.dir/OrbitPlotter.cpp.i
+
+CMakeFiles/lotka_volterra.dir/OrbitPlotter.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/lotka_volterra.dir/OrbitPlotter.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/artan/Progetto_prog/OrbitPlotter.cpp -o CMakeFiles/lotka_volterra.dir/OrbitPlotter.cpp.s
+
 CMakeFiles/lotka_volterra.dir/input.cpp.o: CMakeFiles/lotka_volterra.dir/flags.make
 CMakeFiles/lotka_volterra.dir/input.cpp.o: /home/artan/Progetto_prog/input.cpp
 CMakeFiles/lotka_volterra.dir/input.cpp.o: CMakeFiles/lotka_volterra.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/artan/Progetto_prog/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/lotka_volterra.dir/input.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/artan/Progetto_prog/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/lotka_volterra.dir/input.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/lotka_volterra.dir/input.cpp.o -MF CMakeFiles/lotka_volterra.dir/input.cpp.o.d -o CMakeFiles/lotka_volterra.dir/input.cpp.o -c /home/artan/Progetto_prog/input.cpp
 
 CMakeFiles/lotka_volterra.dir/input.cpp.i: cmake_force
@@ -132,7 +160,9 @@ CMakeFiles/lotka_volterra.dir/input.cpp.s: cmake_force
 lotka_volterra_OBJECTS = \
 "CMakeFiles/lotka_volterra.dir/main.cpp.o" \
 "CMakeFiles/lotka_volterra.dir/simulation.cpp.o" \
+"CMakeFiles/lotka_volterra.dir/PlotAxes.cpp.o" \
 "CMakeFiles/lotka_volterra.dir/Plotter.cpp.o" \
+"CMakeFiles/lotka_volterra.dir/OrbitPlotter.cpp.o" \
 "CMakeFiles/lotka_volterra.dir/input.cpp.o"
 
 # External object files for target lotka_volterra
@@ -140,7 +170,9 @@ lotka_volterra_EXTERNAL_OBJECTS =
 
 lotka_volterra: CMakeFiles/lotka_volterra.dir/main.cpp.o
 lotka_volterra: CMakeFiles/lotka_volterra.dir/simulation.cpp.o
+lotka_volterra: CMakeFiles/lotka_volterra.dir/PlotAxes.cpp.o
 lotka_volterra: CMakeFiles/lotka_volterra.dir/Plotter.cpp.o
+lotka_volterra: CMakeFiles/lotka_volterra.dir/OrbitPlotter.cpp.o
 lotka_volterra: CMakeFiles/lotka_volterra.dir/input.cpp.o
 lotka_volterra: CMakeFiles/lotka_volterra.dir/build.make
 lotka_volterra: CMakeFiles/lotka_volterra.dir/compiler_depend.ts
@@ -148,7 +180,7 @@ lotka_volterra: /usr/lib/x86_64-linux-gnu/libsfml-graphics.so.2.6.2
 lotka_volterra: /usr/lib/x86_64-linux-gnu/libsfml-window.so.2.6.2
 lotka_volterra: /usr/lib/x86_64-linux-gnu/libsfml-system.so.2.6.2
 lotka_volterra: CMakeFiles/lotka_volterra.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/artan/Progetto_prog/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking CXX executable lotka_volterra"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/artan/Progetto_prog/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Linking CXX executable lotka_volterra"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/lotka_volterra.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

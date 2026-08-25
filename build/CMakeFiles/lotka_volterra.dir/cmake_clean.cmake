@@ -1,5 +1,9 @@
 file(REMOVE_RECURSE
   "CMakeFiles/lotka_volterra.dir/link.d"
+  "CMakeFiles/lotka_volterra.dir/OrbitPlotter.cpp.o"
+  "CMakeFiles/lotka_volterra.dir/OrbitPlotter.cpp.o.d"
+  "CMakeFiles/lotka_volterra.dir/PlotAxes.cpp.o"
+  "CMakeFiles/lotka_volterra.dir/PlotAxes.cpp.o.d"
   "CMakeFiles/lotka_volterra.dir/Plotter.cpp.o"
   "CMakeFiles/lotka_volterra.dir/Plotter.cpp.o.d"
   "CMakeFiles/lotka_volterra.dir/input.cpp.o"

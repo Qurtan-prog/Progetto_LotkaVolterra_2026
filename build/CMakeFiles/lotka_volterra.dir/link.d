@@ -4,7 +4,9 @@ lotka_volterra: \
   /usr/lib/gcc/x86_64-linux-gnu/14/crtbeginS.o \
   CMakeFiles/lotka_volterra.dir/main.cpp.o \
   CMakeFiles/lotka_volterra.dir/simulation.cpp.o \
+  CMakeFiles/lotka_volterra.dir/PlotAxes.cpp.o \
   CMakeFiles/lotka_volterra.dir/Plotter.cpp.o \
+  CMakeFiles/lotka_volterra.dir/OrbitPlotter.cpp.o \
   CMakeFiles/lotka_volterra.dir/input.cpp.o \
   /usr/lib/x86_64-linux-gnu/libsfml-graphics.so.2.6.2 \
   /usr/lib/x86_64-linux-gnu/libsfml-window.so.2.6.2 \
@@ -65,7 +67,11 @@ CMakeFiles/lotka_volterra.dir/main.cpp.o:
 
 CMakeFiles/lotka_volterra.dir/simulation.cpp.o:
 
+CMakeFiles/lotka_volterra.dir/PlotAxes.cpp.o:
+
 CMakeFiles/lotka_volterra.dir/Plotter.cpp.o:
+
+CMakeFiles/lotka_volterra.dir/OrbitPlotter.cpp.o:
 
 CMakeFiles/lotka_volterra.dir/input.cpp.o:
 

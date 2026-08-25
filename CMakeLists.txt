@@ -19,3 +19,17 @@ add_executable(lotka_volterra
 
 target_include_directories(lotka_volterra PRIVATE include)
 target_link_libraries(lotka_volterra PRIVATE sfml-graphics sfml-window sfml-system Threads::Threads)
+
+
+# --- Test executable ---
+enable_testing()
+
+add_executable(simulation_test
+    simulation_test.cpp
+    simulation.cpp
+    input.cpp
+)
+
+target_include_directories(simulation_test PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
+
+add_test(NAME simulation_test COMMAND simulation_test)

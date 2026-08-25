@@ -65,6 +65,16 @@ CMAKE_BINARY_DIR = /home/artan/Progetto_prog/build
 #=============================================================================
 # Targets provided globally by CMake.
 
+# Special rule for the target test
+test:
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Running tests..."
+	/usr/bin/ctest --force-new-ctest-process $(ARGS)
+.PHONY : test
+
+# Special rule for the target test
+test/fast: test
+.PHONY : test/fast
+
 # Special rule for the target edit_cache
 edit_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "No interactive CMake dialog available..."
@@ -129,6 +139,67 @@ lotka_volterra/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/lotka_volterra.dir/build.make CMakeFiles/lotka_volterra.dir/build
 .PHONY : lotka_volterra/fast
 
+#=============================================================================
+# Target rules for targets named simulation_test
+
+# Build rule for target.
+simulation_test: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 simulation_test
+.PHONY : simulation_test
+
+# fast build rule for target.
+simulation_test/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/simulation_test.dir/build.make CMakeFiles/simulation_test.dir/build
+.PHONY : simulation_test/fast
+
+OrbitPlotter.o: OrbitPlotter.cpp.o
+.PHONY : OrbitPlotter.o
+
+# target to build an object file
+OrbitPlotter.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/lotka_volterra.dir/build.make CMakeFiles/lotka_volterra.dir/OrbitPlotter.cpp.o
+.PHONY : OrbitPlotter.cpp.o
+
+OrbitPlotter.i: OrbitPlotter.cpp.i
+.PHONY : OrbitPlotter.i
+
+# target to preprocess a source file
+OrbitPlotter.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/lotka_volterra.dir/build.make CMakeFiles/lotka_volterra.dir/OrbitPlotter.cpp.i
+.PHONY : OrbitPlotter.cpp.i
+
+OrbitPlotter.s: OrbitPlotter.cpp.s
+.PHONY : OrbitPlotter.s
+
+# target to generate assembly for a file
+OrbitPlotter.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/lotka_volterra.dir/build.make CMakeFiles/lotka_volterra.dir/OrbitPlotter.cpp.s
+.PHONY : OrbitPlotter.cpp.s
+
+PlotAxes.o: PlotAxes.cpp.o
+.PHONY : PlotAxes.o
+
+# target to build an object file
+PlotAxes.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/lotka_volterra.dir/build.make CMakeFiles/lotka_volterra.dir/PlotAxes.cpp.o
+.PHONY : PlotAxes.cpp.o
+
+PlotAxes.i: PlotAxes.cpp.i
+.PHONY : PlotAxes.i
+
+# target to preprocess a source file
+PlotAxes.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/lotka_volterra.dir/build.make CMakeFiles/lotka_volterra.dir/PlotAxes.cpp.i
+.PHONY : PlotAxes.cpp.i
+
+PlotAxes.s: PlotAxes.cpp.s
+.PHONY : PlotAxes.s
+
+# target to generate assembly for a file
+PlotAxes.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/lotka_volterra.dir/build.make CMakeFiles/lotka_volterra.dir/PlotAxes.cpp.s
+.PHONY : PlotAxes.cpp.s
+
 Plotter.o: Plotter.cpp.o
 .PHONY : Plotter.o
 
@@ -159,6 +230,7 @@ input.o: input.cpp.o
 # target to build an object file
 input.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/lotka_volterra.dir/build.make CMakeFiles/lotka_volterra.dir/input.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/simulation_test.dir/build.make CMakeFiles/simulation_test.dir/input.cpp.o
 .PHONY : input.cpp.o
 
 input.i: input.cpp.i
@@ -167,6 +239,7 @@ input.i: input.cpp.i
 # target to preprocess a source file
 input.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/lotka_volterra.dir/build.make CMakeFiles/lotka_volterra.dir/input.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/simulation_test.dir/build.make CMakeFiles/simulation_test.dir/input.cpp.i
 .PHONY : input.cpp.i
 
 input.s: input.cpp.s
@@ -175,6 +248,7 @@ input.s: input.cpp.s
 # target to generate assembly for a file
 input.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/lotka_volterra.dir/build.make CMakeFiles/lotka_volterra.dir/input.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/simulation_test.dir/build.make CMakeFiles/simulation_test.dir/input.cpp.s
 .PHONY : input.cpp.s
 
 main.o: main.cpp.o
@@ -207,6 +281,7 @@ simulation.o: simulation.cpp.o
 # target to build an object file
 simulation.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/lotka_volterra.dir/build.make CMakeFiles/lotka_volterra.dir/simulation.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/simulation_test.dir/build.make CMakeFiles/simulation_test.dir/simulation.cpp.o
 .PHONY : simulation.cpp.o
 
 simulation.i: simulation.cpp.i
@@ -215,6 +290,7 @@ simulation.i: simulation.cpp.i
 # target to preprocess a source file
 simulation.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/lotka_volterra.dir/build.make CMakeFiles/lotka_volterra.dir/simulation.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/simulation_test.dir/build.make CMakeFiles/simulation_test.dir/simulation.cpp.i
 .PHONY : simulation.cpp.i
 
 simulation.s: simulation.cpp.s
@@ -223,7 +299,32 @@ simulation.s: simulation.cpp.s
 # target to generate assembly for a file
 simulation.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/lotka_volterra.dir/build.make CMakeFiles/lotka_volterra.dir/simulation.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/simulation_test.dir/build.make CMakeFiles/simulation_test.dir/simulation.cpp.s
 .PHONY : simulation.cpp.s
+
+simulation_test.o: simulation_test.cpp.o
+.PHONY : simulation_test.o
+
+# target to build an object file
+simulation_test.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/simulation_test.dir/build.make CMakeFiles/simulation_test.dir/simulation_test.cpp.o
+.PHONY : simulation_test.cpp.o
+
+simulation_test.i: simulation_test.cpp.i
+.PHONY : simulation_test.i
+
+# target to preprocess a source file
+simulation_test.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/simulation_test.dir/build.make CMakeFiles/simulation_test.dir/simulation_test.cpp.i
+.PHONY : simulation_test.cpp.i
+
+simulation_test.s: simulation_test.cpp.s
+.PHONY : simulation_test.s
+
+# target to generate assembly for a file
+simulation_test.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/simulation_test.dir/build.make CMakeFiles/simulation_test.dir/simulation_test.cpp.s
+.PHONY : simulation_test.cpp.s
 
 # Help Target
 help:
@@ -233,7 +334,15 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
+	@echo "... test"
 	@echo "... lotka_volterra"
+	@echo "... simulation_test"
+	@echo "... OrbitPlotter.o"
+	@echo "... OrbitPlotter.i"
+	@echo "... OrbitPlotter.s"
+	@echo "... PlotAxes.o"
+	@echo "... PlotAxes.i"
+	@echo "... PlotAxes.s"
 	@echo "... Plotter.o"
 	@echo "... Plotter.i"
 	@echo "... Plotter.s"
@@ -246,6 +355,9 @@ help:
 	@echo "... simulation.o"
 	@echo "... simulation.i"
 	@echo "... simulation.s"
+	@echo "... simulation_test.o"
+	@echo "... simulation_test.i"
+	@echo "... simulation_test.s"
 .PHONY : help
 
 

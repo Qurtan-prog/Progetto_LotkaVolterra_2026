@@ -1,3 +1,5 @@
 /home/artan/Progetto_prog/build/CMakeFiles/lotka_volterra.dir
+/home/artan/Progetto_prog/build/CMakeFiles/simulation_test.dir
+/home/artan/Progetto_prog/build/CMakeFiles/test.dir
 /home/artan/Progetto_prog/build/CMakeFiles/edit_cache.dir
 /home/artan/Progetto_prog/build/CMakeFiles/rebuild_cache.dir
