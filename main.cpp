@@ -1,24 +1,34 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 66892ce3ed1c79ddc6b95e31454bcf6b60c90bcf
 // PER COMPIPLARE: g++ -std=c++20 -Wall -Wextra simulation.cpp input.cpp main.cpp -o lotka_volterra
 
 #include "simulation.hpp"
 #include "input.hpp"
+<<<<<<< HEAD
 =======
 #include "simulation.hpp"
 #include "input.hpp"
 #include "Plotter.hpp"
 #include "OrbitPlotter.hpp"
 >>>>>>> artan-branch
+=======
+>>>>>>> 66892ce3ed1c79ddc6b95e31454bcf6b60c90bcf
 
 #include <cstdlib>
 #include <fstream>
 #include <iostream>
 #include <stdexcept>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 66892ce3ed1c79ddc6b95e31454bcf6b60c90bcf
 
 using lotka_volterra::Parameters;
 using lotka_volterra::read_positive_double;
 using lotka_volterra::read_positive_int;
+<<<<<<< HEAD
 =======
 #include <thread>
 #include <vector>
@@ -30,12 +40,17 @@ using lotka_volterra::read_positive_double;
 using lotka_volterra::read_positive_int;
 using lotka_volterra::Series;
 >>>>>>> artan-branch
+=======
+>>>>>>> 66892ce3ed1c79ddc6b95e31454bcf6b60c90bcf
 using lotka_volterra::Simulation;
 using lotka_volterra::State;
 
 int main()
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 66892ce3ed1c79ddc6b95e31454bcf6b60c90bcf
   try {
     std::cout << "Initial prey population x0: ";
     double const x0{read_positive_double(std::cin, "x0")};
@@ -75,6 +90,7 @@ int main()
     std::cerr << "Error: " << error.what() << '\n';
     return EXIT_FAILURE;
   }
+<<<<<<< HEAD
 }
 =======
     try
@@ -162,3 +178,6 @@ int main()
     }
 }
 >>>>>>> artan-branch
+=======
+}
+>>>>>>> 66892ce3ed1c79ddc6b95e31454bcf6b60c90bcf
