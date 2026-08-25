@@ -1,13 +1,13 @@
-cmake_minimum_required(VERSION 3.16)
+cmake_minimum_required(VERSION 3.17)  # Ninja Multi-Config needs 3.17+
 project(LotkaVolterra LANGUAGES CXX)
 
-# Upgrade to C++20 for defaulted comparison operators (operator== = default)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(SFML 2.6 COMPONENTS graphics window system REQUIRED)
 find_package(Threads REQUIRED)
 
+# --- Main executable ---
 add_executable(lotka_volterra
     main.cpp
     simulation.cpp
@@ -17,9 +17,8 @@ add_executable(lotka_volterra
     input.cpp
 )
 
-target_include_directories(lotka_volterra PRIVATE include)
+target_include_directories(lotka_volterra PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
 target_link_libraries(lotka_volterra PRIVATE sfml-graphics sfml-window sfml-system Threads::Threads)
-
 
 # --- Test executable ---
 enable_testing()

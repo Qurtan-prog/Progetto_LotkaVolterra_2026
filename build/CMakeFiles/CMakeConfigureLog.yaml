@@ -326,3 +326,167 @@ events:
         
       exitCode: 0
 ...
+
+---
+events:
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake-3.31/Modules/CheckLibraryExists.cmake:78 (try_compile)"
+      - "/usr/share/cmake-3.31/Modules/FindX11.cmake:693 (check_library_exists)"
+      - "CMakeLists.txt:10 (find_package)"
+    checks:
+      - "Looking for XOpenDisplay in /usr/lib/x86_64-linux-gnu/libX11.so"
+    directories:
+      source: "/home/artan/Progetto_prog/build/CMakeFiles/CMakeScratch/TryCompile-iXdPkb"
+      binary: "/home/artan/Progetto_prog/build/CMakeFiles/CMakeScratch/TryCompile-iXdPkb"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: ""
+      CMAKE_CXX_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+    buildResult:
+      variable: "X11_LIB_X11_SOLO"
+      cached: true
+      stdout: |
+        Change Dir: '/home/artan/Progetto_prog/build/CMakeFiles/CMakeScratch/TryCompile-iXdPkb'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_b74bf/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_b74bf.dir/build.make CMakeFiles/cmTC_b74bf.dir/build
+        gmake[1]: Entering directory '/home/artan/Progetto_prog/build/CMakeFiles/CMakeScratch/TryCompile-iXdPkb'
+        Building CXX object CMakeFiles/cmTC_b74bf.dir/CheckFunctionExists.cxx.o
+        /usr/bin/c++   -DCHECK_FUNCTION_EXISTS=XOpenDisplay -std=gnu++20 -o CMakeFiles/cmTC_b74bf.dir/CheckFunctionExists.cxx.o -c /home/artan/Progetto_prog/build/CMakeFiles/CMakeScratch/TryCompile-iXdPkb/CheckFunctionExists.cxx
+        Linking CXX executable cmTC_b74bf
+        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_b74bf.dir/link.txt --verbose=1
+        /usr/bin/c++  -DCHECK_FUNCTION_EXISTS=XOpenDisplay CMakeFiles/cmTC_b74bf.dir/CheckFunctionExists.cxx.o -o cmTC_b74bf  /usr/lib/x86_64-linux-gnu/libX11.so
+        gmake[1]: Leaving directory '/home/artan/Progetto_prog/build/CMakeFiles/CMakeScratch/TryCompile-iXdPkb'
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake-3.31/Modules/CheckFunctionExists.cmake:93 (try_compile)"
+      - "/usr/share/cmake-3.31/Modules/FindX11.cmake:708 (check_function_exists)"
+      - "CMakeLists.txt:10 (find_package)"
+    checks:
+      - "Looking for gethostbyname"
+    directories:
+      source: "/home/artan/Progetto_prog/build/CMakeFiles/CMakeScratch/TryCompile-JbuYhA"
+      binary: "/home/artan/Progetto_prog/build/CMakeFiles/CMakeScratch/TryCompile-JbuYhA"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: ""
+      CMAKE_CXX_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+    buildResult:
+      variable: "CMAKE_HAVE_GETHOSTBYNAME"
+      cached: true
+      stdout: |
+        Change Dir: '/home/artan/Progetto_prog/build/CMakeFiles/CMakeScratch/TryCompile-JbuYhA'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_0999d/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_0999d.dir/build.make CMakeFiles/cmTC_0999d.dir/build
+        gmake[1]: Entering directory '/home/artan/Progetto_prog/build/CMakeFiles/CMakeScratch/TryCompile-JbuYhA'
+        Building CXX object CMakeFiles/cmTC_0999d.dir/CheckFunctionExists.cxx.o
+        /usr/bin/c++   -DCHECK_FUNCTION_EXISTS=gethostbyname -std=gnu++20 -o CMakeFiles/cmTC_0999d.dir/CheckFunctionExists.cxx.o -c /home/artan/Progetto_prog/build/CMakeFiles/CMakeScratch/TryCompile-JbuYhA/CheckFunctionExists.cxx
+        Linking CXX executable cmTC_0999d
+        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_0999d.dir/link.txt --verbose=1
+        /usr/bin/c++  -DCHECK_FUNCTION_EXISTS=gethostbyname CMakeFiles/cmTC_0999d.dir/CheckFunctionExists.cxx.o -o cmTC_0999d
+        gmake[1]: Leaving directory '/home/artan/Progetto_prog/build/CMakeFiles/CMakeScratch/TryCompile-JbuYhA'
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake-3.31/Modules/CheckFunctionExists.cmake:93 (try_compile)"
+      - "/usr/share/cmake-3.31/Modules/FindX11.cmake:722 (check_function_exists)"
+      - "CMakeLists.txt:10 (find_package)"
+    checks:
+      - "Looking for connect"
+    directories:
+      source: "/home/artan/Progetto_prog/build/CMakeFiles/CMakeScratch/TryCompile-SfEpNg"
+      binary: "/home/artan/Progetto_prog/build/CMakeFiles/CMakeScratch/TryCompile-SfEpNg"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: ""
+      CMAKE_CXX_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+    buildResult:
+      variable: "CMAKE_HAVE_CONNECT"
+      cached: true
+      stdout: |
+        Change Dir: '/home/artan/Progetto_prog/build/CMakeFiles/CMakeScratch/TryCompile-SfEpNg'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_84010/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_84010.dir/build.make CMakeFiles/cmTC_84010.dir/build
+        gmake[1]: Entering directory '/home/artan/Progetto_prog/build/CMakeFiles/CMakeScratch/TryCompile-SfEpNg'
+        Building CXX object CMakeFiles/cmTC_84010.dir/CheckFunctionExists.cxx.o
+        /usr/bin/c++   -DCHECK_FUNCTION_EXISTS=connect -std=gnu++20 -o CMakeFiles/cmTC_84010.dir/CheckFunctionExists.cxx.o -c /home/artan/Progetto_prog/build/CMakeFiles/CMakeScratch/TryCompile-SfEpNg/CheckFunctionExists.cxx
+        Linking CXX executable cmTC_84010
+        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_84010.dir/link.txt --verbose=1
+        /usr/bin/c++  -DCHECK_FUNCTION_EXISTS=connect CMakeFiles/cmTC_84010.dir/CheckFunctionExists.cxx.o -o cmTC_84010
+        gmake[1]: Leaving directory '/home/artan/Progetto_prog/build/CMakeFiles/CMakeScratch/TryCompile-SfEpNg'
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake-3.31/Modules/CheckFunctionExists.cmake:93 (try_compile)"
+      - "/usr/share/cmake-3.31/Modules/FindX11.cmake:731 (check_function_exists)"
+      - "CMakeLists.txt:10 (find_package)"
+    checks:
+      - "Looking for remove"
+    directories:
+      source: "/home/artan/Progetto_prog/build/CMakeFiles/CMakeScratch/TryCompile-ckUNvL"
+      binary: "/home/artan/Progetto_prog/build/CMakeFiles/CMakeScratch/TryCompile-ckUNvL"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: ""
+      CMAKE_CXX_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+    buildResult:
+      variable: "CMAKE_HAVE_REMOVE"
+      cached: true
+      stdout: |
+        Change Dir: '/home/artan/Progetto_prog/build/CMakeFiles/CMakeScratch/TryCompile-ckUNvL'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_e2854/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_e2854.dir/build.make CMakeFiles/cmTC_e2854.dir/build
+        gmake[1]: Entering directory '/home/artan/Progetto_prog/build/CMakeFiles/CMakeScratch/TryCompile-ckUNvL'
+        Building CXX object CMakeFiles/cmTC_e2854.dir/CheckFunctionExists.cxx.o
+        /usr/bin/c++   -DCHECK_FUNCTION_EXISTS=remove -std=gnu++20 -o CMakeFiles/cmTC_e2854.dir/CheckFunctionExists.cxx.o -c /home/artan/Progetto_prog/build/CMakeFiles/CMakeScratch/TryCompile-ckUNvL/CheckFunctionExists.cxx
+        Linking CXX executable cmTC_e2854
+        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_e2854.dir/link.txt --verbose=1
+        /usr/bin/c++  -DCHECK_FUNCTION_EXISTS=remove CMakeFiles/cmTC_e2854.dir/CheckFunctionExists.cxx.o -o cmTC_e2854
+        gmake[1]: Leaving directory '/home/artan/Progetto_prog/build/CMakeFiles/CMakeScratch/TryCompile-ckUNvL'
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake-3.31/Modules/CheckFunctionExists.cmake:93 (try_compile)"
+      - "/usr/share/cmake-3.31/Modules/FindX11.cmake:740 (check_function_exists)"
+      - "CMakeLists.txt:10 (find_package)"
+    checks:
+      - "Looking for shmat"
+    directories:
+      source: "/home/artan/Progetto_prog/build/CMakeFiles/CMakeScratch/TryCompile-hAH5Ib"
+      binary: "/home/artan/Progetto_prog/build/CMakeFiles/CMakeScratch/TryCompile-hAH5Ib"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: ""
+      CMAKE_CXX_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+    buildResult:
+      variable: "CMAKE_HAVE_SHMAT"
+      cached: true
+      stdout: |
+        Change Dir: '/home/artan/Progetto_prog/build/CMakeFiles/CMakeScratch/TryCompile-hAH5Ib'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_da4bf/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_da4bf.dir/build.make CMakeFiles/cmTC_da4bf.dir/build
+        gmake[1]: Entering directory '/home/artan/Progetto_prog/build/CMakeFiles/CMakeScratch/TryCompile-hAH5Ib'
+        Building CXX object CMakeFiles/cmTC_da4bf.dir/CheckFunctionExists.cxx.o
+        /usr/bin/c++   -DCHECK_FUNCTION_EXISTS=shmat -std=gnu++20 -o CMakeFiles/cmTC_da4bf.dir/CheckFunctionExists.cxx.o -c /home/artan/Progetto_prog/build/CMakeFiles/CMakeScratch/TryCompile-hAH5Ib/CheckFunctionExists.cxx
+        Linking CXX executable cmTC_da4bf
+        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_da4bf.dir/link.txt --verbose=1
+        /usr/bin/c++  -DCHECK_FUNCTION_EXISTS=shmat CMakeFiles/cmTC_da4bf.dir/CheckFunctionExists.cxx.o -o cmTC_da4bf
+        gmake[1]: Leaving directory '/home/artan/Progetto_prog/build/CMakeFiles/CMakeScratch/TryCompile-hAH5Ib'
+        
+      exitCode: 0
+...

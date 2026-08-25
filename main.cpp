@@ -91,6 +91,9 @@ int main()
         // riferimento: e' sicuro perche' aspettiamo la fine del thread
         // (join) prima di uscire da main, quindi i vettori restano
         // validi per tutta la vita del thread.
+
+
+
         std::thread orbitThread(&OrbitPlotter::show, std::cref(x_values), std::cref(y_values));
 
         // La finestra principale (popolazioni + H) gira sul thread
