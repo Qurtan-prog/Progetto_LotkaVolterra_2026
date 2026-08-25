@@ -4,7 +4,7 @@
 # compile CXX with /usr/bin/c++
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/home/artan/Progetto_prog/include
+CXX_INCLUDES = -I/home/artan/Progetto_prog
 
 CXX_FLAGS = -std=gnu++20
 
