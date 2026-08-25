@@ -1,4 +1,7 @@
 build/
+*.o
 lotka_volterra
 output.txt
+test_simulation
+test_parameters
 

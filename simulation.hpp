@@ -1,22 +1,8 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 66892ce3ed1c79ddc6b95e31454bcf6b60c90bcf
-#include <vector>
-
-#ifndef SIMULATION_HPP
-#define SIMULATION_HPP
-
-<<<<<<< HEAD
-=======
 #ifndef SIMULATION_HPP
 #define SIMULATION_HPP
 
 #include <vector>
 
->>>>>>> artan-branch
-=======
->>>>>>> 66892ce3ed1c79ddc6b95e31454bcf6b60c90bcf
 namespace lotka_volterra
 {
 
