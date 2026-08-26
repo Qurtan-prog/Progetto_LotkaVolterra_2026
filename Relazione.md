@@ -88,6 +88,53 @@ cmake --build build --config Release --target test
 
 ## Parametri di input e formato di output
 
+### Input
+
+Il programma richiede in sequenza, da tastiera, otto valori — tutti
+numeri reali strettamente positivi (tranne il numero di passi, un
+intero positivo):
+
+| Parametro | Significato |
+|---|---|
+| `x0`, `y0` | popolazione iniziale di prede e predatori |
+| `A`, `B` | tasso di natalità e mortalità delle prede |
+| `C`, `D` | tasso di natalità e mortalità dei predatori |
+| `dt` | passo di integrazione |
+| Numero di passi | durata della simulazione, in multipli di `dt` |
+
+**Esempio di input** (valori inseriti in sequenza, uno per riga):
+```
+1200
+1000
+1.0
+0.00125
+0.001
+1.0
+0.001
+5000
+```
+
+### Output
+
+Il programma produce due tipi di output.
+
+**File di testo** (`output.txt`): una riga per ogni stato calcolato
+(`numero di passi + 1` righe, incluso lo stato iniziale), con quattro
+colonne separate da spazio: tempo, popolazione di prede, popolazione
+di predatori, valore dell'integrale primo H. Esempio delle prime righe,
+con i parametri sopra:
+```
+0 1200 1000 -11.5478
+0.001 1199.7 1000.2 -11.5478
+0.002 1199.4 1000.4 -11.5478
+```
+
+**Finestra grafica** (libreria SFML): al termine della simulazione si
+apre una finestra che resta aperta finché l'utente non la chiude
+manualmente, divisa in due grafici affiancati: l'andamento nel tempo
+delle popolazioni di prede e predatori (grafico superiore), e
+dell'integrale primo H (grafico inferiore).
+
 ## Risultati e loro interpretazione
 
 ## Strategia di test
