@@ -52,7 +52,7 @@ namespace lotka_volterra
 
             if (fontLoaded)
             {
-                const double v = vMax - (vMax - vMin) * i / nGridLines;
+                const double v = vMax - (vMax - vMin) * i / nGridLines; // value
                 std::ostringstream oss;
                 oss << std::fixed << std::setprecision(1) << v;
                 sf::Text label(oss.str(), font, 12);
@@ -72,7 +72,7 @@ namespace lotka_volterra
 
             if (fontLoaded)
             {
-                const double t = tMin + (tMax - tMin) * i / nGridLines;
+                const double t = tMin + (tMax - tMin) * i / nGridLines; // time
                 std::ostringstream oss;
                 oss << std::fixed << std::setprecision(1) << t;
                 sf::Text label(oss.str(), font, 12);
