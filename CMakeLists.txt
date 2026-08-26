@@ -5,7 +5,6 @@ set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(SFML 2.6 COMPONENTS graphics window system REQUIRED)
-find_package(Threads REQUIRED)
 
 # --- Main executable ---
 add_executable(lotka_volterra
@@ -13,12 +12,11 @@ add_executable(lotka_volterra
     simulation.cpp
     PlotAxes.cpp
     Plotter.cpp
-    OrbitPlotter.cpp
     input.cpp
 )
 
 target_include_directories(lotka_volterra PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
-target_link_libraries(lotka_volterra PRIVATE sfml-graphics sfml-window sfml-system Threads::Threads)
+target_link_libraries(lotka_volterra PRIVATE sfml-graphics sfml-window sfml-system)
 
 # --- Test executable ---
 enable_testing()
