@@ -4,7 +4,7 @@
 
 #include "simulation.hpp"
 #include "input.hpp"
-#include "Plotter.hpp"
+#include "plotter.hpp"
 
 #include <cstdlib>
 #include <fstream>
