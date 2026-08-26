@@ -8,9 +8,9 @@ popolazioni nel tempo tramite SFML.
 ## Dipendenze
 
 - Compilatore C++ con supporto a C++20
-- [CMake](https://cmake.org/) ≥ 3.17
+- [CMake](https://cmake.org/) >= 3.17
 - [Ninja](https://ninja-build.org/)
-- [SFML](https://www.sfml-dev.org/) ≥ 2.6
+- [SFML](https://www.sfml-dev.org/) >= 2.5
 
 Su sistemi Debian/Ubuntu:
 ```bash
@@ -26,7 +26,7 @@ posizionare nella cartella del progetto.
 ```bash
 cmake -S . -B build -G "Ninja Multi-Config"
 cmake --build build --config Debug
-./build/lotka_volterra
+./build/Debug/lotka_volterra
 ```
 
 ## Test
@@ -45,7 +45,7 @@ cmake --build build --config Release --target test
 
 - `simulation.hpp`/`simulation.cpp` — logica del modello fisico
 - `input.hpp`/`input.cpp` — lettura e validazione dell'input
-- `Plotter.hpp`/`Plotter.cpp`, `PlotAxes.hpp`/`PlotAxes.cpp` — visualizzazione grafica
+- `plotter.hpp`/`plotter.cpp`, `plot_axes.hpp`/`plot_axes.cpp` — visualizzazione grafica
 - `main.cpp` — programma principale
 - `simulation_test.cpp` — test automatici (Doctest)
 

@@ -53,6 +53,39 @@ Anche il costruttore di `Simulation` valida i propri parametri, lanciando `std::
 
 ## Dipendenze e istruzioni di compilazione ed esecuzione
 
+Il progetto richiede un compilatore C++ con supporto a C++20, la
+libreria grafica SFML (versione 2.5 o successiva), CMake (versione
+3.17 o successiva) e Ninja.
+
+Su sistemi Debian/Ubuntu, le dipendenze si installano con:
+```bash
+sudo apt install libsfml-dev ninja-build
+```
+Per l'esecuzione dei test è inoltre necessario l'header singolo di
+Doctest (`doctest.h`), scaricabile da
+<https://github.com/doctest/doctest> e da posizionare nella cartella
+del progetto.
+
+La compilazione è gestita tramite CMake, con generatore Ninja
+Multi-Config:
+```bash
+cmake -S . -B build -G "Ninja Multi-Config"
+cmake --build build --config Debug
+```
+Per eseguire il programma:
+```bash
+./build/Debug/lotka_volterra
+```
+Per eseguire i test:
+```bash
+cmake --build build --config Debug --target test
+```
+Per generare una build ottimizzata (facoltativo):
+```bash
+cmake --build build --config Release
+cmake --build build --config Release --target test
+```
+
 ## Parametri di input e formato di output
 
 ## Risultati e loro interpretazione
