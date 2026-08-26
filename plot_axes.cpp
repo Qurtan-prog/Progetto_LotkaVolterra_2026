@@ -1,4 +1,4 @@
-#include "PlotAxes.hpp"
+#include "plot_axes.hpp"
 
 #include <iomanip>
 #include <sstream>

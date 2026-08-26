@@ -1,5 +1,5 @@
-#include "Plotter.hpp"
-#include "PlotAxes.hpp"
+#include "plotter.hpp"
+#include "plot_axes.hpp"
 
 #include <algorithm>
 
