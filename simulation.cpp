@@ -5,17 +5,19 @@
 
 namespace lotka_volterra
 {
-
-  Simulation::Simulation(Parameters const &params, double x0, double y0, double dt)
-      : params_(params), dt_(dt),
-        x_eq_(params.D / params.C), y_eq_(params.A / params.B)
+  Parameters validated(Parameters const &params, double x0, double y0, double dt)
   {
     if (x0 <= 0.0 || y0 <= 0.0 || params.A <= 0.0 || params.B <= 0.0 || params.C <= 0.0 || params.D <= 0.0 || dt <= 0.0)
     {
-      throw std::invalid_argument(
-          "Simulation: All parameters have to be positive");
+      throw std::invalid_argument("Simulation All parameters have to be positive");
     }
+    return params;
+  }
 
+  Simulation::Simulation(Parameters const &params, double x0, double y0, double dt)
+      : params_(validated(params, x0, y0, dt)), dt_(dt),
+        x_eq_(params.D / params.C), y_eq_(params.A / params.B)
+  {
     double const x0_rel{x0 / x_eq_};
     double const y0_rel{y0 / y_eq_};
 
@@ -33,6 +35,13 @@ namespace lotka_volterra
     // x aggiornata dopo, usando gia' il nuovo valore di y.
     double const y_new{y_prev + params_.D * (x_prev - 1.0) * y_prev * dt_};
     double const x_new{x_prev + params_.A * (1.0 - y_new) * x_prev * dt_};
+
+    //!(x_new > 0.0) e non (x_new <= 0.0) per intercettare i NaN che altrimente non vedremmo
+    if (!(x_new > 0.0) || !(y_new > 0.0))
+    {
+      throw std::runtime_error(
+          "Simulation::evolve: the simulation has diverged; next simulation try with a smaller dt !");
+    }
 
     x_rel_.push_back(x_new);
     y_rel_.push_back(y_new);
