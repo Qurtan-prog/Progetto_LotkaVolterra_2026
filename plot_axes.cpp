@@ -100,4 +100,4 @@ namespace lotka_volterra
         }
     }
 
-} // namespace lotka_volterra
+}

@@ -1,7 +1,3 @@
-// PER COMPILARE: g++ -std=c++20 -Wall -Wextra simulation.cpp input.cpp \
-//   Plotter.cpp main.cpp -o lotka_volterra \
-//   -lsfml-graphics -lsfml-window -lsfml-system
-
 #include "simulation.hpp"
 #include "input.hpp"
 #include "plotter.hpp"
@@ -51,7 +47,6 @@ int main()
 
         std::ofstream out{"output.txt"};
 
-        // Dati da passare sia al file di output sia ai Plotter
         std::vector<double> time;
         std::vector<double> x_values;
         std::vector<double> y_values;
@@ -76,7 +71,7 @@ int main()
         std::cout << "Simulazione completata: " << sim.size()
                   << " stati scritti in output.txt\n";
 
-        // Costruzione delle serie e apertura delle finestre grafiche.
+        // Series construction and graphic windows' opening
         std::vector<Series> populationSeries{
             Series{"Prede x(t)", x_values, sf::Color::Blue},
             Series{"Predatori y(t)", y_values, sf::Color::Red}};

@@ -119,7 +119,8 @@ TEST_CASE("Simulation: behaviour with valid parameters")
   SUBCASE("H is conserved during evolution")
   {
     double const H0{sim.state(0).H};
-    for (int i{0}; i < 1000; ++i) {
+    for (int i{0}; i < 1000; ++i)
+    {
       sim.evolve();
     }
     CHECK(sim.state(sim.size() - 1).H == doctest::Approx(H0));

@@ -31,12 +31,9 @@ namespace lotka_volterra
     double const x_prev{x_rel_.back()};
     double const y_prev{y_rel_.back()};
 
-    // Eulero simplettico: y aggiornata prima, usando ancora x_prev;
-    // x aggiornata dopo, usando gia' il nuovo valore di y.
     double const y_new{y_prev + params_.D * (x_prev - 1.0) * y_prev * dt_};
     double const x_new{x_prev + params_.A * (1.0 - y_new) * x_prev * dt_};
 
-    //!(x_new > 0.0) e non (x_new <= 0.0) per intercettare i NaN che altrimente non vedremmo
     if (!(x_new > 0.0) || !(y_new > 0.0))
     {
       throw std::runtime_error(
@@ -75,4 +72,4 @@ namespace lotka_volterra
     return -params_.D * std::log(x_abs) + params_.C * x_abs + params_.B * y_abs - params_.A * std::log(y_abs);
   }
 
-} // namespace lotka_volterra
+}
