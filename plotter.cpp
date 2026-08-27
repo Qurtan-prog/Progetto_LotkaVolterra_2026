@@ -46,7 +46,7 @@ namespace lotka_volterra
         assert(!series.empty());
         for (const auto &s : series)
         {
-            assert(s.values.size() == time.size()); 
+            assert(s.values.size() == time.size());
         }
 
         const double tMin = time.front();
@@ -100,7 +100,7 @@ namespace lotka_volterra
                        const std::vector<Series> &populationSeries,
                        const Series &hSeries)
     {
-        const sf::FloatRect topArea(90.f, 60.f, 900.f, 280.f);
+        const sf::FloatRect topArea(110.f, 60.f, 880.f, 280.f);
         const sf::FloatRect bottomArea(90.f, 430.f, 900.f, 240.f);
 
         const std::vector<Series> hSeriesVec{hSeries};

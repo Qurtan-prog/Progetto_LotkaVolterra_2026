@@ -4,10 +4,11 @@
 #include <sstream>
 #include <string>
 #include <vector>
+#include <cmath>
+#include <algorithm>
 
 namespace lotka_volterra
 {
-
     namespace
     {
         const std::vector<std::string> kFontPaths = {
@@ -15,7 +16,18 @@ namespace lotka_volterra
             "/usr/share/fonts/truetype/liberation/LiberationSans-Regular.ttf",
             "/System/Library/Fonts/Supplemental/Arial.ttf",
             "C:/Windows/Fonts/arial.ttf"};
-    } // namespace
+
+        int decimalsFor(double range, int nDivisions)
+        {
+            if (!(range > 0.0))
+            {
+                return 1;
+            }
+            double const step = range / nDivisions;
+            int const d = static_cast<int>(std::ceil(-std::log10(step))) + 1;
+            return std::clamp(d, 0, 9);
+        }
+    }
 
     bool loadAnyFont(sf::Font &font)
     {
@@ -42,6 +54,9 @@ namespace lotka_volterra
 
         constexpr int nGridLines = 5;
 
+        int const vDecimals = decimalsFor(vMax - vMin, nGridLines);
+        int const tDecimals = decimalsFor(tMax - tMin, nGridLines);
+
         for (int i = 0; i <= nGridLines; ++i)
         {
             const float fy = area.top + area.height * i / nGridLines;
@@ -54,10 +69,11 @@ namespace lotka_volterra
             {
                 const double v = vMax - (vMax - vMin) * i / nGridLines; // value
                 std::ostringstream oss;
-                oss << std::fixed << std::setprecision(1) << v;
+                oss << std::fixed << std::setprecision(vDecimals) << v;
                 sf::Text label(oss.str(), font, 12);
                 label.setFillColor(sf::Color::Black);
-                label.setPosition(area.left - 55.f, fy - 8.f);
+                sf::FloatRect const b{label.getLocalBounds()};
+                label.setPosition(area.left - 10.f - (b.left + b.width), fy - 8.f);
                 target.draw(label);
             }
         }
@@ -77,7 +93,8 @@ namespace lotka_volterra
                 oss << std::fixed << std::setprecision(1) << t;
                 sf::Text label(oss.str(), font, 12);
                 label.setFillColor(sf::Color::Black);
-                label.setPosition(fx - 10.f, area.top + area.height + 5.f);
+                sf::FloatRect const b{label.getLocalBounds()};
+                label.setPosition(fx - (b.left + b.width) / 2.f, area.top + area.height + 5.f);
                 target.draw(label);
             }
         }
