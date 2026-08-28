@@ -168,15 +168,12 @@ Le prove sono state condotte con i parametri riportati come esempio nella sezion
 
 **Andamento delle popolazioni** Con dt = 0.001 e 5000 passi (t finale = 5), le prede oscillano nell'intervallo [730.4, 1270.7] e i predatori nell'intervallo [584.3, 1063.1], come atteso per un'orbita chiusa attorno al punto di equilibrio nel piano delle fasi. Prolungando la simulazione a 50000 passi (t finale = 50, circa otto periodi) si osserva che l'ampiezza dell'oscillazione resta stabile nel tempo (prede nell'intervallo [730.4, 1329.0], con l'estremo superiore leggermente più alto solo perché in una simulazione più lunga si campionano più massimi dell'orbita), confermando che la traiettoria non collassa né diverge, ma percorre ripetutamente la stessa orbita chiusa, come previsto dalla teoria per questo sistema.
 
-![Grafico delle popolazioni](Simulation_normal_values.png)
 
-<img src="Simulation_normal_values.png" alt="Grafico delle popolazioni" width="300">
+<img src="Simulation_normal_values.png" alt="Grafico delle popolazioni" width="450">
 
 **Equilibrio** Avviando la simulazione esattamente nel punto di equilibrio (x0 = 1000, y0 = 800) lo stato resta invariato (x = 1000, y = 800) per tutta la durata della simulazione, come atteso: il punto di equilibrio è un punto fisso del sistema, e la trasformazione in coordinate relative usata internamente non introduce alcuna deviazione dalle aspettative in questo caso limite.
 
-![Grafico con i punti di equilibrio come valori iniziali](Equilibrium_points.png)
-
-<img src="Equilibrium_points.png" alt="Grafico con i punti di equilibrio come valori iniziali" width="300">
+<img src="Equilibrium_points.png" alt="Grafico con i punti di equilibrio come valori iniziali" width="450">
 
 ## Strategia di test
 I test automatici, raccolti in simulation_test.cpp, sono scritti con il framework header-only Doctest e sono organizzati in TEST_CASE distinti, ciascuno suddiviso in più SUBCASE per raggruppare scenari correlati (ad es. le diverse combinazioni di parametri non validi) senza duplicare il codice di costruzione degli oggetti coinvolti.
