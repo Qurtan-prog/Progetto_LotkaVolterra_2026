@@ -5,7 +5,7 @@
 
 ## Introduzione
 
-Il progetto implementa una simulazione numerica del sistema preda-predatore descritto dalle equazioni di Lotka-Volterra. La simulazione integra le equazioni con il metodo Eulero simplettico. Lo stato del sistema è rappresentato in coordinate relative rispetto al punto di equilibrio per migliorare la stabilità numerica dell'integrazione.
+Il progetto implementa una simulazione numerica del sistema preda-predatore descritto dalle equazioni di Lotka-Volterra. La simulazione integra le equazioni con il metodo di integrazione Eulero simplettico. Lo stato del sistema è rappresentato in coordinate relative rispetto al punto di equilibrio per migliorare la stabilità numerica dell'integrazione.
 
 Questa è la prima consegna del progetto.
 
@@ -14,28 +14,28 @@ Questa è la prima consegna del progetto.
 ### Struttura del progetto
 
 Il progetto è organizzato in più file: 
-- `simulation.hpp`/`simulation.cpp` in cui si torva la logica del modello fisico (la classe `Simulation` e gli struct `Parameters`/`State`); 
+- `simulation.hpp`/`simulation.cpp` in cui si trova la logica del modello fisico (la classe `Simulation` e gli struct `Parameters`/`State`); 
 - `input.hpp`/`input.cpp` contengono la lettura e validazione dell'input da tastiera; 
 - `plot_axes.hpp`/`plot_axes.cpp` in cui si disegnano gli assi e la griglia e si seleziona il font;
 - `plotter.hpp`/`plotter.cpp` creano la finestra grafica con i plot dell'andamento delle popolazioni nel tempo e dell'integrale primo H(t);
 - `main.cpp` gestisce l'interazione con l'utente e l'esecuzione della simulazione; 
 - `simulation_test.cpp` contiene i test automatici scritti con il framework Doctest.
 
-La separazione di `input.hpp`/`input.cpp` da `main.cpp` è stata ritenuta necessaria al fine di testare la logica di lettura e validazione dei parametri in modo automatico. Le funzioni di lettura che si trovano lì, infatti, operano su un parametro generico di tipo `std::istream&` anziché direttamente su `std::cin`, potendo quindi simularne il comportamento con un `std::istringstream` costruito a partire da una stringa, non richiedendo l'input da tastiera. Per mantenere questa logica all'interno di `main.cpp` si sarebbe ottenuto un conflitto con la funzione `main` generata automaticamente da Doctest. 
+La separazione di `input.hpp`/`input.cpp` da `main.cpp` è stata ritenuta necessaria al fine di testare la logica di lettura e validazione dei parametri in modo automatico. Le funzioni di lettura che si trovano lì, infatti, operano su un parametro generico di tipo `std::istream&` anziché direttamente su `std::cin`, potendo quindi simularne il comportamento con un `std::istringstream` costruito a partire da una stringa, non richiedendo l'input da tastiera. Mantenere questa logica all'interno di `main.cpp` avrebbe causato un conflitto con la funzione `main` generata automaticamente da Doctest. 
 
-Si è cercato di spartire le responsabilità tra i file: `plot_axes.cpp` e `plotter.cpp` sono separati perché le funzioni del primo non dipendono dal secondo (gestione finestra separato da disegno di assi e scelta del font), mentre in `simulation.cpp` si ha la sola fisica del sistema, tutto quello che riguarda le scelte dell'utente (il passo dt e il numero di ripetizioni, ad esempio) sono gestite nel `main.cpp`.
+Si è cercato di spartire le responsabilità tra i file: `plot_axes.cpp` e `plotter.cpp` sono separati perché le funzioni del primo non dipendono dal secondo (la gestione della finestra separata dal disegno degli assi e della scelta del font), mentre in `simulation.cpp` si ha la sola fisica del sistema, tutto quello che riguarda le scelte dell'utente (il passo dt e il numero di ripetizioni, ad esempio) è gestito nel `main.cpp`.
 
 Tutte le entità definite dal progetto (`Parameters`, `State`, `Simulation`, e le funzioni di lettura dell'input) sono racchiuse all'interno del namespace `lotka_volterra`, per raggrupparle sotto un nome comune e ridurre il rischio di collisioni con nomi definiti altrove.
 
 ### La classe `Simulation`
 
-La classe `Simulation` implementa il modello fisico descritto dalle equazioni di Lotka-Volterra, integrate secondo il metodo Eulero simplettico nella loro forma discretizzata, come da consegna.
+La classe `Simulation` implementa il modello fisico descritto dalle equazioni di Lotka-Volterra, integrate secondo il metodo di Eulero simplettico nella loro forma discretizzata, come da consegna.
 
 I parametri del costruttore sono stati raggruppati in due struct, `Parameters` e `State`, per evitare di passare sette valori `double` liberi non distinguibili al costruttore.
 
 Gli stati intermedi sono espressi in coordinate relative rispetto al punto di equilibrio per avere maggiore stabilità numerica. Si convertono poi in valori assoluti quando servono a calcolare H e lo stato (x, y, H).
 
-La classe contiene il metodo `evolve()`, che fa avanzare la simulazione di un solo passo (`simulation.cpp` contiene la sola fisica del sistema, come detto prima). È qui che viene applicato il metodo Eulero simplettico (si calcola `y` con `x_prev` per aggiornare poi `x` con la nuova `y`) con le seguenti equazioni: 
+La classe contiene il metodo `evolve()`, che fa avanzare la simulazione di un solo passo (`simulation.cpp` contiene la sola fisica del sistema, come detto prima). È qui che viene applicato il metodo di integrazione Eulero simplettico (si calcola `y` con `x_prev` per aggiornare poi `x` con la nuova `y`) con le seguenti equazioni: 
 
 $$
 y_i^{rel} = y_{i-1}^{rel} + D\left(x_{i-1}^{rel} - 1\right) y_{i-1}^{rel} \, \Delta t
@@ -49,11 +49,11 @@ Il metodo `state(i)` restituisce in un'unica chiamata il terzetto di valori (x, 
 
 ### Visualizzazione grafica: `plot_axes` e `plotter`
 
-L'implementazione di grafici dell'andamento delle popolazioni x(t), y(t) e dell'integrale primo H(t) è stato reso possibile grazie all'uso della libreria grafica SFML (Simple and Fast Multimedia Library). 
+L'implementazione di grafici dell'andamento delle popolazioni x(t), y(t) e dell'integrale primo H(t) è stata resa possibile grazie all'uso della libreria grafica SFML (Simple and Fast Multimedia Library). 
 
-- `plotter.hpp`/`plotter.cpp` contengono la classe `Plotter` che gestisce la finestra grafica del programma (`sf::RenderWindow`), al cui interno si trova il metodo `show()` che si occupa di disegnare su un'unica finestra due grafici distinti: l'andamento nel tempo delle due popolazioni e l'integrale primo. In particolare, i metodi privati `drawPlot()` e `drawLegend()` vengono usati da `show()`, rispettivamente, per fare il disegno esplicito delle singole curve e per disegnare la legenda.
+- `plotter.hpp`/`plotter.cpp` contengono la classe `Plotter` che gestisce la finestra grafica del programma (`sf::RenderWindow`), al cui interno si trova il metodo `show()` che si occupa di disegnare su un'unica finestra due grafici distinti: l'andamento nel tempo delle due popolazioni e l'integrale primo. In particolare, i metodi privati `drawPlot()` e `drawLegend()` vengono usati, rispettivamente, per fare il disegno esplicito delle singole curve e per disegnare la legenda. `show()` richiama `drawPlot()`, che a sua volta invoca `drawLegend()`.
 
-- `plot_axes.hpp`/`plot_axes.cpp` contiengono invece due funzioni libere, `drawAxes()` e `loadAnyFont()`, che non appartengono a nessuna classe. `drawAxes()` disegna bordo, griglia ed etichette numeriche in un riquadro rettangolare (`sf::FloatRect`); `loadAnyFont()` prova a caricare un font di sistema tra alcuni percorsi noti (diversi a seconda del sistema operativo).
+- `plot_axes.hpp`/`plot_axes.cpp` contengono invece due funzioni libere, `drawAxes()` e `loadAnyFont()`, che non appartengono a nessuna classe. `drawAxes()` disegna bordo, griglia ed etichette numeriche in un riquadro rettangolare (`sf::FloatRect`); `loadAnyFont()` prova a caricare un font di sistema tra alcuni percorsi noti (diversi a seconda del sistema operativo).
 
 ### Validazione dell'input
 
@@ -65,7 +65,7 @@ Anche il costruttore di `Simulation` valida i propri parametri, lanciando `std::
 
 - **Funzionalità di C++20**: il codice fa uso di due funzionalità introdotte con lo standard C++20.
 
-  La prima sono gli inizializzatori designati (*designated initializers*), che permettono di costruire uno struct specificando esplicitamente a quale membro è assegnato ciascun valore (ad esempio `Parameters{.A = 1.0, .B = 0.00125, .C = 0.001, .D = 1.0}`), invece di affidarsi al solo ordine posizionale dei valori. Questa scelta è dovuta a un errore concreto commesso durante lo sviluppo, in cui i parametri C e D sono stati scambiati per errore causando un'instabilità numerica nella simulazione: rendendo esplicito a quale membro appartiene ogni valore si è ridotto questo tipo di rischio.
+  La prima consiste negli inizializzatori designati (*designated initializers*), che permettono di costruire uno struct specificando esplicitamente a quale membro è assegnato ciascun valore (ad esempio `Parameters{.A = 1.0, .B = 0.00125, .C = 0.001, .D = 1.0}`), invece di affidarsi al solo ordine posizionale dei valori. Questa scelta è dovuta a un errore concreto commesso durante lo sviluppo, in cui i parametri C e D sono stati scambiati per errore causando un'instabilità numerica nella simulazione: rendendo esplicito a quale membro appartiene ogni valore si è ridotto questo tipo di rischio.
 
   La seconda funzionalità è la possibilità di richiedere al compilatore la generazione automatica di un operatore di uguaglianza membro-a-membro tramite `bool operator==(...) const = default`, usata sugli struct `Parameters` e `State` per poterli confrontare direttamente nei test, senza scrivere a mano un confronto ripetitivo membro a membro.
 
@@ -166,15 +166,21 @@ dell'integrale primo H (grafico inferiore).
 ## Strategia di test
 I test automatici, raccolti in `simulation_test.cpp`, sono scritti con il framework header-only Doctest e sono organizzati in `TEST_CASE` distinti, ciascuno suddiviso in più `SUBCASE` per raggruppare scenari correlati (ad esempio le diverse combinazioni di parametri non validi).
 
-I test si occupano principalmente di tre verifiche:
+I test si occupano principalmente delle seguenti verifiche:
 
 **Validazione dell'input** Le funzioni `read_positive_double` e `read_positive_int` sono testate sia sul caso di successo (lettura di un valore valido), sia sui casi di errori attesi: valore non numerico, valore nullo, valore negativo. In tutti i casi di errore si verifica che venga lanciata un'eccezione `std::runtime_error`, tramite `CHECK_THROWS_AS`.
 
 **Validazione dei parametri di `Simulation`** Per ciascuno dei sette parametri del costruttore (`A`, `B`, `C`, `D`, `x0`, `y0`, `dt`) è presente una `SUBCASE` che rende non valido un solo parametro alla volta, lasciando gli altri fissati a valori validi, e verifica che il costruttore lanci `std::invalid_argument`. Questo tipo di approccio permette di individuare rapidamente quale controllo di validità, se rimosso o modificato per errore, farebbe fallire il test.
 Il comportamento della simulazione con parametri validi viene verificato grazie ad un'unica istanza di `Simulation`, condivisa fra le varie `SUBCASE` di uno stesso `TEST_CASE` e viene usata per verificare: che `parameters()` restituisca esattamente i parametri passati al costruttore (sfruttando l'operatore di uguaglianza generato automaticamente su `Parameters`); che lo stato iniziale corrisponda a `x0`/`y0`; che ogni chiamata a `evolve()` aggiunga esattamente uno stato; che l'accesso con un indice fuori intervallo lanci `std::out_of_range` e che l'integrale primo H si mantenga approssimativamente costante (con `doctest::Approx`) dopo mille passi di evoluzione.
 
-**Validazinone del punto di equilibrio** Un test che verifica che, partendo esattamente dal punto di equilibrio, lo stato non cambi dopo l'evoluzione.
+**Validazione del punto di equilibrio** Un test che verifica che, partendo esattamente dal punto di equilibrio, lo stato non cambi dopo l'evoluzione.
 
 **Validazione dell'andamento di `evolve()`** Un test che confronta il risultato di un singolo passo di `evolve()` con il valore calcolato a mano applicando direttamente la formula del metodo di integrazione Eulero simplettico, così da verificare l'esattezza numerica dell'implementazione.
 
 ## Uso di intelligenza artificiale generativa
+L'uso diretto di intelligenza artificiale generativa in questo progetto è stato limitato a:
+- interpretazione di errori di compilazione 
+- ricerca di funzioni, metodi e algoritmi non appresi a lezione 
+- aiuto nelle fasi di comprensione delle modalità di utilizzo della libreria grafica SFML
+- consigli nelle migliorie grafiche a livello visivo (es. evitare la sovrapposizione dei numeri con il grafico)
+Ogni informazione ottenuta dall'intelligenza artificiale è stata istruttiva ed elaborata consapevolmente.
