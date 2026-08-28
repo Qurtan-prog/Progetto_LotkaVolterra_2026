@@ -170,9 +170,14 @@ Le prove sono state condotte con i parametri riportati come esempio nella sezion
 
 ![Grafico delle popolazioni](Simulation_normal_values.png)
 
+<img src="Simulation_normal_values.png" alt="Grafico delle popolazioni" width="300">
+
 **Equilibrio** Avviando la simulazione esattamente nel punto di equilibrio (x0 = 1000, y0 = 800) lo stato resta invariato (x = 1000, y = 800) per tutta la durata della simulazione, come atteso: il punto di equilibrio è un punto fisso del sistema, e la trasformazione in coordinate relative usata internamente non introduce alcuna deviazione dalle aspettative in questo caso limite.
 
 ![Grafico con i punti di equilibrio come valori iniziali](Equilibrium_points.png)
+
+<img src="Equilibrium_points.png" alt="Grafico con i punti di equilibrio come valori iniziali" width="300">
+
 ## Strategia di test
 I test automatici, raccolti in simulation_test.cpp, sono scritti con il framework header-only Doctest e sono organizzati in TEST_CASE distinti, ciascuno suddiviso in più SUBCASE per raggruppare scenari correlati (ad es. le diverse combinazioni di parametri non validi) senza duplicare il codice di costruzione degli oggetti coinvolti.
 
