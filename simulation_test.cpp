@@ -16,8 +16,8 @@ using lotka_volterra::State;
 
 TEST_CASE("read_positive_double") {
   SUBCASE("valid value is read correctly") {
-    std::istringstream in{"3.14"};
-    CHECK(read_positive_double(in, "test") == doctest::Approx(3.14));
+    std::istringstream in{"7.3"};
+    CHECK(read_positive_double(in, "test") == doctest::Approx(7.3));
   }
   SUBCASE("non-numeric value throws an exception") {
     std::istringstream in{"abc"};

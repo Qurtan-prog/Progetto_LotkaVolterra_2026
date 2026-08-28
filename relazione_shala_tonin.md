@@ -154,27 +154,27 @@ dell'integrale primo H (grafico inferiore).
 
 ## Risultati e loro interpretazione
 
-**Andamento delle popolazioni** Le prove sono state condotte con i parametri riportati come esempio nella sezione precedente (`x0 = 1200, y0 = 1000, A = 1.0, B = 0.00125, C = 0.001, D = 1.0`). Con `dt = 0.001` e `10000 passi` (t finale = 5), le prede oscillano nell'intervallo [730.4, 1270.7] e i predatori nell'intervallo [584.3, 1063.1], come atteso per un'orbita chiusa attorno al punto di equilibrio nel piano delle fasi (si veda il grafico qua sotto). 
+**Andamento delle popolazioni** Le prove sono state condotte con i parametri riportati come esempio nella sezione precedente (`x0 = 1200`, `y0 = 1000`, `A = 1.0`, `B = 0.00125`, `C = 0.001`, `D = 1.0`). Con `dt = 0.001` e `20000 passi` (t finale = 20), le prede oscillano nell'intervallo [730.4, 1270.7] e i predatori nell'intervallo [584.3, 1063.1], come atteso per un'orbita chiusa attorno al punto di equilibrio nel piano delle fasi (si veda il grafico qua sotto). 
 
 
 <img src="Simulation_normal_values.png" alt="Grafico delle popolazioni" width="450">
 
-**Equilibrio** Avviando la simulazione esattamente nel punto di equilibrio (x0 = 1000, y0 = 800) lo stato resta invariato (x = 1000, y = 800) per tutta la durata della simulazione, come atteso: il punto di equilibrio è un punto fisso del sistema, e la trasformazione in coordinate relative usata internamente non introduce alcuna deviazione dalle aspettative in questo caso limite.
+**Equilibrio** Avviando la simulazione esattamente nel punto di equilibrio per `A = 1.0`, `B = 0.00125`, `C = 0.001`, `D = 1.0` (quindi: `x0 = 1000`, `y0 = 800`) lo stato resta invariato (`x = 1000`, `y = 800`) per tutta la durata della simulazione (si veda il grafico qua sotto), come atteso: il punto di equilibrio è un punto fisso del sistema.
 
 <img src="Equilibrium_points.png" alt="Grafico con i punti di equilibrio come valori iniziali" width="450">
 
 ## Strategia di test
-I test automatici, raccolti in simulation_test.cpp, sono scritti con il framework header-only Doctest e sono organizzati in `TEST_CASE` distinti, ciascuno suddiviso in più `SUBCASE` per raggruppare scenari correlati (ad es. le diverse combinazioni di parametri non validi) senza duplicare il codice di costruzione degli oggetti coinvolti.
+I test automatici, raccolti in `simulation_test.cpp`, sono scritti con il framework header-only Doctest e sono organizzati in `TEST_CASE` distinti, ciascuno suddiviso in più `SUBCASE` per raggruppare scenari correlati (ad esempio le diverse combinazioni di parametri non validi).
 
-La strategia adottata copre tre aspetti distinti:
+I test si occupano principalmente di tre verifiche:
 
 **Validazione dell'input** Le funzioni `read_positive_double` e `read_positive_int` sono testate sia sul caso di successo (lettura di un valore valido), sia sui casi di errori attesi: valore non numerico, valore nullo, valore negativo. In tutti i casi di errore si verifica che venga lanciata un'eccezione `std::runtime_error`, tramite `CHECK_THROWS_AS`.
 
-**Validazione dei parametri di Simulation** Per ciascuno dei sette parametri del costruttore (A, B, C, D, x0, y0, dt) è presente una `SUBCASE` che rende non valido un solo parametro alla volta, lasciando gli altri fissati a valori validi, e verifica che il costruttore lanci std::invalid_argument. Questo tipo di approccio permette di individuare rapidamente quale controllo di validità, se rimosso o modificato per errore, farebbe fallire il test.
-Il comportamento della simulazione con parametri validi viene verificato grazie ad un'unica istanza di Simulation, condivisa fra le varie `SUBCASE` di uno stesso `TEST_CASE` e viene usata per verificare: che `parameters()` restituisca esattamente i parametri passati al costruttore (sfruttando l'operatore di uguaglianza generato automaticamente su Parameters); che lo stato iniziale corrisponda a x0/y0; che ogni chiamata a `evolve()` aggiunga esattamente uno stato; che l'accesso con un indice fuori intervallo lanci `std::out_of_range` e che l'integrale primo H si mantenga approssimativamente costante (con `doctest::Approx`) dopo mille passi di evoluzione.
+**Validazione dei parametri di `Simulation`** Per ciascuno dei sette parametri del costruttore (`A`, `B`, `C`, `D`, `x0`, `y0`, `dt`) è presente una `SUBCASE` che rende non valido un solo parametro alla volta, lasciando gli altri fissati a valori validi, e verifica che il costruttore lanci `std::invalid_argument`. Questo tipo di approccio permette di individuare rapidamente quale controllo di validità, se rimosso o modificato per errore, farebbe fallire il test.
+Il comportamento della simulazione con parametri validi viene verificato grazie ad un'unica istanza di `Simulation`, condivisa fra le varie `SUBCASE` di uno stesso `TEST_CASE` e viene usata per verificare: che `parameters()` restituisca esattamente i parametri passati al costruttore (sfruttando l'operatore di uguaglianza generato automaticamente su `Parameters`); che lo stato iniziale corrisponda a `x0`/`y0`; che ogni chiamata a `evolve()` aggiunga esattamente uno stato; che l'accesso con un indice fuori intervallo lanci `std::out_of_range` e che l'integrale primo H si mantenga approssimativamente costante (con `doctest::Approx`) dopo mille passi di evoluzione.
 
-**Validazinone del punto di equilibrio** Un test che verifica che, partendo esattamente dal punto di equilibrio, lo stato non cambi dopo l'evoluzione, così da controllare che la trasformazione in coordinate relative sia corretta anche in questo caso limite.
+**Validazinone del punto di equilibrio** Un test che verifica che, partendo esattamente dal punto di equilibrio, lo stato non cambi dopo l'evoluzione.
 
-**Validazione dell'andamento di `evolve()`** Un test che confronta il risultato di un singolo passo di `evolve()` con il valore calcolato a mano applicando direttamente la formula di Eulero simplettico, così da verificare l'esattezza numerica dell'implementazione e non solo le sue proprietà qualitative.
+**Validazione dell'andamento di `evolve()`** Un test che confronta il risultato di un singolo passo di `evolve()` con il valore calcolato a mano applicando direttamente la formula del metodo di integrazione Eulero simplettico, così da verificare l'esattezza numerica dell'implementazione.
 
 ## Uso di intelligenza artificiale generativa
