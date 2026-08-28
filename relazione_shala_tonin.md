@@ -182,5 +182,6 @@ L'uso diretto di intelligenza artificiale generativa in questo progetto è stato
 - interpretazione di errori di compilazione 
 - ricerca di funzioni, metodi e algoritmi non appresi a lezione 
 - aiuto nelle fasi di comprensione delle modalità di utilizzo della libreria grafica SFML
-- consigli nelle migliorie grafiche a livello visivo (es. evitare la sovrapposizione dei numeri con il grafico)
+- consigli nelle migliorie grafiche a livello visivo (es. evitare la sovrapposizione dei numeri con il grafico).
+
 Ogni informazione ottenuta dall'intelligenza artificiale è stata istruttiva ed elaborata consapevolmente.
