@@ -17,11 +17,11 @@ Il progetto è organizzato in più file:
 - `simulation.hpp`/`simulation.cpp` in cui si torva la logica del modello fisico (la classe `Simulation` e gli struct `Parameters`/`State`); 
 - `input.hpp`/`input.cpp` contengono la lettura e validazione dell'input da tastiera; 
 - `plot_axes.hpp`/`plot_axes.cpp` in cui si disegnano gli assi la griglia e si seleziona il font;
-- `plotter.hpp`/`plotter.cpp` crea la finestra grafica coni plot dell'andamento delle popolazioni nel tempo e dell'integrale primo H(t);
+- `plotter.hpp`/`plotter.cpp` crea la finestra grafica con i plot dell'andamento delle popolazioni nel tempo e dell'integrale primo H(t);
 - `main.cpp` gestisce l'interazione con l'utente e l'esecuzione della simulazione; 
 - `simulation_test.cpp` contiene i test automatici scritti con il framework Doctest.
 
-La separazione di `input.hpp`/`input.cpp` da `main.cpp` è stata ritesnuta necessaria al fine di testare la logica di lettura e validazione dei parametri in modo automatico. Le funzioni di lettura che si trovano lì infatti operano su un parametro generico di tipo `std::istream&` anziché direttamente su `std::cin`, potendo quindi simularne i comportamento con un `std::istringstream` costruito a partire da una stringa, non richiedendo l'input da tastiera. Per mantenere questa logica all'interno di `main.cpp` si sarebbe ottenuto un conflitto con la funzione `main` generata automaticamente da Doctest. 
+La separazione di `input.hpp`/`input.cpp` da `main.cpp` è stata ritenuta necessaria al fine di testare la logica di lettura e validazione dei parametri in modo automatico. Le funzioni di lettura che si trovano lì infatti operano su un parametro generico di tipo `std::istream&` anziché direttamente su `std::cin`, potendo quindi simularne il comportamento con un `std::istringstream` costruito a partire da una stringa, non richiedendo l'input da tastiera. Per mantenere questa logica all'interno di `main.cpp` si sarebbe ottenuto un conflitto con la funzione `main` generata automaticamente da Doctest. 
 Si è cercato di spartire le responsabilità tra i file: `plot_axes.cpp` e `plotter.cpp` sono separati perchè le funzioni del primo non dipendono da nulla del secondo (gestione finestra separato da disegno di assi e scelta del font), mentre in `simulation.cpp` si ha la sola fisica del sistema, tutto quello che riguarda le scelte dell'utente (il passo dt e il numero di ripetizioni ad esempio) sono gestite nel `main.cpp`.
 
 Tutte le entità definite dal progetto (`Parameters`, `State`, `Simulation`, e le funzioni di lettura dell'input) sono racchiuse all'interno del namespace `lotka_volterra`, per raggrupparle sotto un nome comune e ridurre il rischio di collisioni con nomi definiti altrove.
@@ -35,6 +35,7 @@ I parametri del costruttore sono stati raggruppati in due struct, `Parameters` e
 Gli stati intermedi sono espressi in coordinate relative rispetto al punto di equilibrio per avere maggiore stabilità numerica. Si convertono poi in valori assoluti quando servono a calcolare H e lo stato (x, y, H).
 
 La classe contiene il metodo `evolve()`, che fa avanzare la simulazione di un solo passo (`simulation.cpp` contiene la sola fisica del sistema, come detto prima). È qui che viene applicato il metodo Eulero simplettico (si calcola `y` con `x_prev` per aggiornare poi `x` con la nuova `y`) con le seguenti equazioni: 
+
 $$
 y_i^{rel} = y_{i-1}^{rel} + D\left(x_{i-1}^{rel} - 1\right) y_{i-1}^{rel} \, \Delta t
 $$
@@ -47,13 +48,13 @@ Il metodo `state(i)` restituisce in un'unica chiamata il terzetto di valori (x, 
 
 ### Visualizzazione grafica: `plot_axes` e `plotter`
 
-L'implementazione di grafici dell'andamento delle popolazioni x(t), y(t) e dell'integrale primo H(t) e' stato reso possibile grazie all'uso della libreria grafica SFML (Simple and Fast Multimedia Library). 
+L'implementazione di grafici dell'andamento delle popolazioni x(t), y(t) e dell'integrale primo H(t) è stato reso possibile grazie all'uso della libreria grafica SFML (Simple and Fast Multimedia Library). 
 
 - `plotter` e' la classe che gestisce la finestra grafica del programma (`sf::RenderWindow`), al cui interno si trova il metodo `show()` che si occupa di disegnare su un'unica finestra due grafici distinti: l'andamento nel tempo delle due popolazioni e l'integrale primo. In particolare, i metodi privati `drawPlot()` e `drawLegend()` vengono usati da `show()`, rispettivamnete, per fare il disegno esplicito delle singole curve e per disegnare la legenda.
 
-- `plot_axes` contiene invece due funzioni libere, `drawAxes()` e `loadAnyFont()`, che non appartengono a nessuna classe. `drawAxes()` disegna bordo, griglia ed etichette numeriche in un riquadro rettangolare (`sf::FloatRect`), dati i range di valori da rappresentare sui due assi; `loadAnyFont()` prova a caricare un font di sistema tra alcuni percorsi noti (diversi a seconda del sistema operativo).
+- `plot_axes` contiene invece due funzioni libere, `drawAxes()` e `loadAnyFont()`, che non appartengono a nessuna classe. `drawAxes()` disegna bordo, griglia ed etichette numeriche in un riquadro rettangolare (`sf::FloatRect`); `loadAnyFont()` prova a caricare un font di sistema tra alcuni percorsi noti (diversi a seconda del sistema operativo).
 
-Le funzioni di `plot_axes` e `plotter` sono state separate perche' le funzioni di `plot_axes` ricevono come parametro tutto il necessario per il loro funzionamento e sono indipendenti da ogni stato interno della classe `Plotter`. L divisione dei compiti di `plotter` e `plot_axes` puo' essere utile per implementazioni future, per esempio se si vuole generare finestre grafiche differenti da quella di `plotter` ma con le stesse proprita' grafiche di `plot_axes` (come un possibile disegno di orbite dello spazio delle fasi delle due popolazioni).
+Le funzioni di `plot_axes` e `plotter` sono state separate perché le funzioni di `plot_axes` ricevono come parametro tutto il necessario per il loro funzionamento e sono indipendenti da ogni stato interno della classe `Plotter`. La divisione dei compiti di `plotter` e `plot_axes` può essere utile per implementazioni future, per esempio se si vuole generare finestre grafiche differenti da quella di `plotter` ma con le stesse proprita' grafiche di `plot_axes` (come un possibile disegno di orbite dello spazio delle fasi delle due popolazioni).
 
 ### Validazione dell'input
 
@@ -75,7 +76,7 @@ Anche il costruttore di `Simulation` valida i propri parametri, lanciando `std::
 
 - **`std::istringstream`**: nei test automatici (nel file `simulation_test.cpp`) si è voluto verificare il comportamento delle funzioni di lettura e validazione dell'input senza richiedere l'inserimento manuale da tastiera. A questo scopo le funzioni di lettura sono state scritte per accettare un parametro di tipo `std::istream&` generico, anziché operare direttamente su `std::cin`: questo permette di passare, nei test, un oggetto `std::istringstream` costruito a partire da una stringa che simula un input (valido o non valido), mentre nel programma vero e proprio si passa `std::cin`.
 
-- **`Libreria SFLM`**: per la parte grafica, quindi `plot_axes.hpp`/`plot_axes.cpp` e `plotter.hpp`/`plotter.cpp`, è stata scritta con supporti esterni alle dispense del corso (tutorial/esempi online/intelligenza artificiale generativa).
+- **`Libreria SFML`**: per la parte grafica, quindi `plot_axes.hpp`/`plot_axes.cpp` e `plotter.hpp`/`plotter.cpp`, è stata scritta con supporti esterni alle dispense del corso (tutorial/esempi online/intelligenza artificiale generativa).
 
 ## Dipendenze e istruzioni di compilazione ed esecuzione
 
@@ -167,21 +168,23 @@ Le prove sono state condotte con i parametri riportati come esempio nella sezion
 
 **Andamento delle popolazioni** Con dt = 0.001 e 5000 passi (t finale = 5), le prede oscillano nell'intervallo [730.4, 1270.7] e i predatori nell'intervallo [584.3, 1063.1], come atteso per un'orbita chiusa attorno al punto di equilibrio nel piano delle fasi. Prolungando la simulazione a 50000 passi (t finale = 50, circa otto periodi) si osserva che l'ampiezza dell'oscillazione resta stabile nel tempo (prede nell'intervallo [730.4, 1329.0], con l'estremo superiore leggermente più alto solo perché in una simulazione più lunga si campionano più massimi dell'orbita), confermando che la traiettoria non collassa né diverge, ma percorre ripetutamente la stessa orbita chiusa, come previsto dalla teoria per questo sistema.
 
-**Equilibrio** Avviando la simulazione esattamente nel punto di equilibrio (x0 = 1000, y0 = 800) lo stato resta invariato (x = 1000, y = 800) per tutta la durata della simulazione, come atteso: il punto di equilibrio è un punto fisso del sistema, e la trasformazione in coordinate relative usata internamente non introduce alcuna deriva spuria in questo caso limite.
+![Grafico delle popolazioni](Simulation_normal_values.png)
 
+**Equilibrio** Avviando la simulazione esattamente nel punto di equilibrio (x0 = 1000, y0 = 800) lo stato resta invariato (x = 1000, y = 800) per tutta la durata della simulazione, come atteso: il punto di equilibrio è un punto fisso del sistema, e la trasformazione in coordinate relative usata internamente non introduce alcuna deviazione dalle aspettative in questo caso limite.
+
+![Grafico con i punti di equilibrio come valori iniziali](Equilibrium_points.png)
 ## Strategia di test
 I test automatici, raccolti in simulation_test.cpp, sono scritti con il framework header-only Doctest e sono organizzati in TEST_CASE distinti, ciascuno suddiviso in più SUBCASE per raggruppare scenari correlati (ad es. le diverse combinazioni di parametri non validi) senza duplicare il codice di costruzione degli oggetti coinvolti.
 
 La strategia adottata copre tre aspetti distinti:
 
-**Validazione dell'input** Le funzioni read_positive_double e read_positive_int sono testate sia sul caso di successo (lettura di un valore valido), sia sui casi di errore attesi: valore non numerico, valore nullo, valore negativo. In tutti i casi di errore si verifica che venga lanciata un'eccezione std::runtime_error, tramite CHECK_THROWS_AS.
+**Validazione dell'input** Le funzioni read_positive_double e read_positive_int sono testate sia sul caso di successo (lettura di un valore valido), sia sui casi di errori attesi: valore non numerico, valore nullo, valore negativo. In tutti i casi di errore si verifica che venga lanciata un'eccezione std::runtime_error, tramite CHECK_THROWS_AS.
 
-**Validazione dei parametri di Simulation** Per ciascuno dei sette parametri del costruttore (A, B, C, D, x0, y0, dt) è presente una SUBCASE che rende non valido un solo parametro alla volta, lasciando gli altri fissati a valori validi, e verifica che il costruttore lanci std::invalid_argument. Questo approccio "un parametro alla volta" permette di individuare rapidamente quale controllo di validità, se rimosso o modificato per errore, farebbe fallire il test.
-Comportamento della simulazione con parametri validi. Un'unica istanza di Simulation, condivisa fra le varie SUBCASE di uno stesso TEST_CASE, viene usata per verificare: che parameters() restituisca esattamente i parametri passati al costruttore (sfruttando l'operatore di uguaglianza generato automaticamente su Parameters); che lo stato iniziale corrisponda a x0/y0; che ogni chiamata a evolve() aggiunga esattamente uno stato; che l'accesso con un indice fuori intervallo lanci std::out_of_range; che l'integrale primo H si mantenga approssimativamente costante (con doctest::Approx) dopo mille passi di evoluzione.
+**Validazione dei parametri di Simulation** Per ciascuno dei sette parametri del costruttore (A, B, C, D, x0, y0, dt) è presente una SUBCASE che rende non valido un solo parametro alla volta, lasciando gli altri fissati a valori validi, e verifica che il costruttore lanci std::invalid_argument. Questo tipo di approccio permette di individuare rapidamente quale controllo di validità, se rimosso o modificato per errore, farebbe fallire il test.
+Il comportamento della simulazione con parametri validi viene verificato grazie ad un'unica istanza di Simulation, condivisa fra le varie SUBCASE di uno stesso TEST_CASE e viene usata per verificare: che parameters() restituisca esattamente i parametri passati al costruttore (sfruttando l'operatore di uguaglianza generato automaticamente su Parameters); che lo stato iniziale corrisponda a x0/y0; che ogni chiamata a evolve() aggiunga esattamente uno stato; che l'accesso con un indice fuori intervallo lanci std::out_of_range e che l'integrale primo H si mantenga approssimativamente costante (con doctest::Approx) dopo mille passi di evoluzione.
 
 **Validazinone del punto di equilibrio** Un test che verifica che, partendo esattamente dal punto di equilibrio, lo stato non cambi dopo l'evoluzione, così da controllare che la trasformazione in coordinate relative sia corretta anche in questo caso limite.
 
-**Validazione dell'andamento di `evolve()`** Un test che confronta il risultato di un singolo passo di evolve() con il valore calcolato a mano applicando direttamente la formula di Eulero simplettico, così da verificare l'esattezza numerica dell'implementazione e non solo le sue proprietà qualitative. Questo test, in particolare, è quello che avrebbe individuato lo scambio accidentale dei parametri C e D menzionato in precedenza.
-## Strumenti utilizzati
+**Validazione dell'andamento di `evolve()`** Un test che confronta il risultato di un singolo passo di evolve() con il valore calcolato a mano applicando direttamente la formula di Eulero simplettico, così da verificare l'esattezza numerica dell'implementazione e non solo le sue proprietà qualitative.
 
 ## Uso di intelligenza artificiale generativa
