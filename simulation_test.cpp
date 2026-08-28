@@ -130,3 +130,37 @@ TEST_CASE("Simulation: behaviour with valid parameters")
     CHECK_THROWS_AS(sim.state(1), std::out_of_range);
   }
 }
+
+TEST_CASE("Simulation: the equilibrium point does not evolve")
+{
+  Parameters const params{.A = 1.0, .B = 0.00125, .C = 0.001, .D = 1.0};
+  // punto di equilibrio: (D/C, A/B) = (1000, 800)
+  Simulation sim{params, 1000.0, 800.0, 0.001};
+
+  for (int i{0}; i < 100; ++i) { sim.evolve(); }
+
+  State const s{sim.state(sim.size() - 1)};
+  CHECK(s.x == doctest::Approx(1000.0));
+  CHECK(s.y == doctest::Approx(800.0));
+}
+
+TEST_CASE("Simulation: one evolve() step matches the symplectic Euler formula")
+{
+  Parameters const params{.A = 1.0, .B = 0.00125, .C = 0.001, .D = 1.0};
+  Simulation sim{params, 1200.0, 1000.0, 0.001};
+  sim.evolve();
+
+  // x_rel = 1.2, y_rel = 1.25
+  // y_new = 1.25 + D*(1.2 - 1)*1.25*dt = 1.25025      -> 1000.2
+  // x_new = 1.2  + A*(1 - y_new)*1.2*dt = 1.1996997   -> 1199.6997
+  State const s{sim.state(1)};
+  CHECK(s.y == doctest::Approx(1000.2));
+  CHECK(s.x == doctest::Approx(1199.6997));
+
+  SUBCASE("above the equilibrium prey count, predators increase")
+{
+  Simulation sim{params, 1200.0, 800.0, 0.001};  // x > D/C, y = A/B
+  sim.evolve();
+  CHECK(sim.state(1).y > sim.state(0).y);
+}
+}
