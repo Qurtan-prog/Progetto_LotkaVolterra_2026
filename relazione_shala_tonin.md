@@ -1,11 +1,11 @@
 # Simulazione numerica del modello preda-predatore di Lotka-Volterra
 
 **Autori:** Shala Artan, Tonin Anita
-**Data:** 27 Agosto 2026
+**Data:** 28 Agosto 2026
 
 ## Introduzione
 
-Il progetto implementa una simulazione numerica del sistema preda-predatore descritto dalle equazioni di Lotka-Volterra. La simulazione integra le equazioni con il metodo di Eulero simplettico, rappresentando lo stato del sistema in coordinate relative rispetto al punto di equilibrio per migliorare la stabilità numerica dell'integrazione.
+Il progetto implementa una simulazione numerica del sistema preda-predatore descritto dalle equazioni di Lotka-Volterra. La simulazione integra le equazioni con il metodo Eulero simplettico. Lo stato del sistema è rappresentato in coordinate relative rispetto al punto di equilibrio per migliorare la stabilità numerica dell'integrazione.
 
 Questa è la prima consegna del progetto.
 
@@ -16,13 +16,14 @@ Questa è la prima consegna del progetto.
 Il progetto è organizzato in più file: 
 - `simulation.hpp`/`simulation.cpp` in cui si torva la logica del modello fisico (la classe `Simulation` e gli struct `Parameters`/`State`); 
 - `input.hpp`/`input.cpp` contengono la lettura e validazione dell'input da tastiera; 
-- `plot_axes.hpp`/`plot_axes.cpp` in cui si disegnano gli assi la griglia e si seleziona il font;
-- `plotter.hpp`/`plotter.cpp` crea la finestra grafica con i plot dell'andamento delle popolazioni nel tempo e dell'integrale primo H(t);
+- `plot_axes.hpp`/`plot_axes.cpp` in cui si disegnano gli assi e la griglia e si seleziona il font;
+- `plotter.hpp`/`plotter.cpp` creano la finestra grafica con i plot dell'andamento delle popolazioni nel tempo e dell'integrale primo H(t);
 - `main.cpp` gestisce l'interazione con l'utente e l'esecuzione della simulazione; 
 - `simulation_test.cpp` contiene i test automatici scritti con il framework Doctest.
 
-La separazione di `input.hpp`/`input.cpp` da `main.cpp` è stata ritenuta necessaria al fine di testare la logica di lettura e validazione dei parametri in modo automatico. Le funzioni di lettura che si trovano lì infatti operano su un parametro generico di tipo `std::istream&` anziché direttamente su `std::cin`, potendo quindi simularne il comportamento con un `std::istringstream` costruito a partire da una stringa, non richiedendo l'input da tastiera. Per mantenere questa logica all'interno di `main.cpp` si sarebbe ottenuto un conflitto con la funzione `main` generata automaticamente da Doctest. 
-Si è cercato di spartire le responsabilità tra i file: `plot_axes.cpp` e `plotter.cpp` sono separati perchè le funzioni del primo non dipendono da nulla del secondo (gestione finestra separato da disegno di assi e scelta del font), mentre in `simulation.cpp` si ha la sola fisica del sistema, tutto quello che riguarda le scelte dell'utente (il passo dt e il numero di ripetizioni ad esempio) sono gestite nel `main.cpp`.
+La separazione di `input.hpp`/`input.cpp` da `main.cpp` è stata ritenuta necessaria al fine di testare la logica di lettura e validazione dei parametri in modo automatico. Le funzioni di lettura che si trovano lì, infatti, operano su un parametro generico di tipo `std::istream&` anziché direttamente su `std::cin`, potendo quindi simularne il comportamento con un `std::istringstream` costruito a partire da una stringa, non richiedendo l'input da tastiera. Per mantenere questa logica all'interno di `main.cpp` si sarebbe ottenuto un conflitto con la funzione `main` generata automaticamente da Doctest. 
+
+Si è cercato di spartire le responsabilità tra i file: `plot_axes.cpp` e `plotter.cpp` sono separati perché le funzioni del primo non dipendono dal secondo (gestione finestra separato da disegno di assi e scelta del font), mentre in `simulation.cpp` si ha la sola fisica del sistema, tutto quello che riguarda le scelte dell'utente (il passo dt e il numero di ripetizioni, ad esempio) sono gestite nel `main.cpp`.
 
 Tutte le entità definite dal progetto (`Parameters`, `State`, `Simulation`, e le funzioni di lettura dell'input) sono racchiuse all'interno del namespace `lotka_volterra`, per raggrupparle sotto un nome comune e ridurre il rischio di collisioni con nomi definiti altrove.
 
@@ -30,7 +31,7 @@ Tutte le entità definite dal progetto (`Parameters`, `State`, `Simulation`, e l
 
 La classe `Simulation` implementa il modello fisico descritto dalle equazioni di Lotka-Volterra, integrate secondo il metodo Eulero simplettico nella loro forma discretizzata, come da consegna.
 
-I parametri del costruttore sono stati raggruppati in due struct, `Parameters` e `State`, per evitare di passare sette valori `double` non distinguibili al costruttore.
+I parametri del costruttore sono stati raggruppati in due struct, `Parameters` e `State`, per evitare di passare sette valori `double` liberi non distinguibili al costruttore.
 
 Gli stati intermedi sono espressi in coordinate relative rispetto al punto di equilibrio per avere maggiore stabilità numerica. Si convertono poi in valori assoluti quando servono a calcolare H e lo stato (x, y, H).
 
@@ -50,33 +51,27 @@ Il metodo `state(i)` restituisce in un'unica chiamata il terzetto di valori (x, 
 
 L'implementazione di grafici dell'andamento delle popolazioni x(t), y(t) e dell'integrale primo H(t) è stato reso possibile grazie all'uso della libreria grafica SFML (Simple and Fast Multimedia Library). 
 
-- `plotter` e' la classe che gestisce la finestra grafica del programma (`sf::RenderWindow`), al cui interno si trova il metodo `show()` che si occupa di disegnare su un'unica finestra due grafici distinti: l'andamento nel tempo delle due popolazioni e l'integrale primo. In particolare, i metodi privati `drawPlot()` e `drawLegend()` vengono usati da `show()`, rispettivamnete, per fare il disegno esplicito delle singole curve e per disegnare la legenda.
+- `plotter.hpp`/`plotter.cpp` contengono la classe `Plotter` che gestisce la finestra grafica del programma (`sf::RenderWindow`), al cui interno si trova il metodo `show()` che si occupa di disegnare su un'unica finestra due grafici distinti: l'andamento nel tempo delle due popolazioni e l'integrale primo. In particolare, i metodi privati `drawPlot()` e `drawLegend()` vengono usati da `show()`, rispettivamente, per fare il disegno esplicito delle singole curve e per disegnare la legenda.
 
-- `plot_axes` contiene invece due funzioni libere, `drawAxes()` e `loadAnyFont()`, che non appartengono a nessuna classe. `drawAxes()` disegna bordo, griglia ed etichette numeriche in un riquadro rettangolare (`sf::FloatRect`); `loadAnyFont()` prova a caricare un font di sistema tra alcuni percorsi noti (diversi a seconda del sistema operativo).
-
-Le funzioni di `plot_axes` e `plotter` sono state separate perché le funzioni di `plot_axes` ricevono come parametro tutto il necessario per il loro funzionamento e sono indipendenti da ogni stato interno della classe `Plotter`. La divisione dei compiti di `plotter` e `plot_axes` può essere utile per implementazioni future, per esempio se si vuole generare finestre grafiche differenti da quella di `plotter` ma con le stesse proprita' grafiche di `plot_axes` (come un possibile disegno di orbite dello spazio delle fasi delle due popolazioni).
+- `plot_axes.hpp`/`plot_axes.cpp` contiengono invece due funzioni libere, `drawAxes()` e `loadAnyFont()`, che non appartengono a nessuna classe. `drawAxes()` disegna bordo, griglia ed etichette numeriche in un riquadro rettangolare (`sf::FloatRect`); `loadAnyFont()` prova a caricare un font di sistema tra alcuni percorsi noti (diversi a seconda del sistema operativo).
 
 ### Validazione dell'input
 
-La lettura dei parametri da `std::cin` è affidata alle funzioni `read_positive_double` e `read_positive_int` (file `input.hpp`/`input.cpp`), le quali verificano sia la correttezza del tipo letto sia la sua validità (valore strettamente positivo). In caso di errore viene lanciata un'eccezione `std::runtime_error`, intercettata in `main.cpp`, che stampa un messaggio descrittivo dell'errore e termina il programma senza richiedere nuovamente il valore, come da consegna.
+La lettura dei parametri da `std::cin` è affidata alle funzioni `read_positive_double` e `read_positive_int` (file `input.hpp`/`input.cpp`), le quali verificano sia la correttezza del tipo letto sia la sua validità (valore strettamente positivo). In caso di errore viene lanciata un'eccezione `std::runtime_error`, intercettata in `main.cpp`, che stampa un messaggio descrittivo dell'errore e termina il programma senza però richiedere nuovamente il valore, come da consegna.
 
-Anche il costruttore di `Simulation` valida i propri parametri, lanciando `std::invalid_argument` se non strettamente positivi; il metodo `state(i)` lancia invece `std::out_of_range` se l'indice richiesto non è disponibile. Si è preferito l'uso di eccezioni rispetto ad `assert` perché queste ultime non possono essere intercettate nei test.alidazione dell'input##
+Anche il costruttore di `Simulation` valida i propri parametri, lanciando `std::invalid_argument` se non strettamente positivi; il metodo `state(i)` lancia invece `std::out_of_range` se l'indice richiesto non è disponibile. Si è preferito l'uso di eccezioni rispetto ad `assert` perché queste ultime non possono essere intercettate nei test di validazione dell'input.
 
 ### Costrutti (e simili) non introdotti a lezione 
 
 - **Funzionalità di C++20**: il codice fa uso di due funzionalità introdotte con lo standard C++20.
 
-  La prima sono gli inizializzatori designati (*designated initializers*), che permettono di costruire uno struct specificando esplicitamente a quale membro è assegnato ciascun valore (ad es. `Parameters{.A = 1.0, .B = 0.00125, .C = 0.001, .D = 1.0}`), invece di affidarsi al solo ordine posizionale dei valori. Questa scelta nasce da un errore concreto commesso durante lo sviluppo, in cui i parametri C e D sono stati scambiati per errore causando un'instabilità numerica nella simulazione: rendendo esplicito a quale membro appartiene ogni valore si è ridotto il rischio di questo tipo di errore.
+  La prima sono gli inizializzatori designati (*designated initializers*), che permettono di costruire uno struct specificando esplicitamente a quale membro è assegnato ciascun valore (ad esempio `Parameters{.A = 1.0, .B = 0.00125, .C = 0.001, .D = 1.0}`), invece di affidarsi al solo ordine posizionale dei valori. Questa scelta è dovuta a un errore concreto commesso durante lo sviluppo, in cui i parametri C e D sono stati scambiati per errore causando un'instabilità numerica nella simulazione: rendendo esplicito a quale membro appartiene ogni valore si è ridotto questo tipo di rischio.
 
   La seconda funzionalità è la possibilità di richiedere al compilatore la generazione automatica di un operatore di uguaglianza membro-a-membro tramite `bool operator==(...) const = default`, usata sugli struct `Parameters` e `State` per poterli confrontare direttamente nei test, senza scrivere a mano un confronto ripetitivo membro a membro.
 
-- **Struct con metodi**: si sono costruiti struct con metodi (non solo dati): gli struct `Parameters` e `State` non solo raggruppano dati (rispettivamente i quattro parametri del modello e lo stato del sistema in un istante), ma definiscono anche un metodo, l'operatore di uguaglianza descritto sopra.
-
-- **`std::ofstream`**: per scrivere i risultati della simulazione su file, il codice usa la classe `std::ofstream` (header `<fstream>`), che si comporta come `std::cout` ma indirizza l'output verso un file su disco invece che verso lo schermo, tramite lo stesso operatore `<<`.
-
 - **`std::istringstream`**: nei test automatici (nel file `simulation_test.cpp`) si è voluto verificare il comportamento delle funzioni di lettura e validazione dell'input senza richiedere l'inserimento manuale da tastiera. A questo scopo le funzioni di lettura sono state scritte per accettare un parametro di tipo `std::istream&` generico, anziché operare direttamente su `std::cin`: questo permette di passare, nei test, un oggetto `std::istringstream` costruito a partire da una stringa che simula un input (valido o non valido), mentre nel programma vero e proprio si passa `std::cin`.
 
-- **`Libreria SFML`**: per la parte grafica, quindi `plot_axes.hpp`/`plot_axes.cpp` e `plotter.hpp`/`plotter.cpp`, è stata scritta con supporti esterni alle dispense del corso (tutorial/esempi online/intelligenza artificiale generativa).
+- **`Libreria SFML`**: usata per la parte grafica, quindi per `plot_axes.hpp`/`plot_axes.cpp` e `plotter.hpp`/`plotter.cpp`. È stata scritta con supporti esterni alle dispense del corso (tutorial/esempi online/intelligenza artificiale generativa).
 
 ## Dipendenze e istruzioni di compilazione ed esecuzione
 
@@ -88,10 +83,7 @@ Su sistemi Debian/Ubuntu, le dipendenze si installano con:
 ```bash
 sudo apt install libsfml-dev ninja-build
 ```
-Per l'esecuzione dei test è inoltre necessario l'header singolo di
-Doctest (`doctest.h`), scaricabile da
-<https://github.com/doctest/doctest> e da posizionare nella cartella
-del progetto.
+Per l'esecuzione dei test è inoltre necessario l'header singolo di Doctest (`doctest.h`).
 
 La compilazione è gestita tramite CMake, con generatore Ninja
 Multi-Config:
@@ -117,9 +109,7 @@ cmake --build build --config Release --target test
 
 ### Input
 
-Il programma richiede in sequenza, da tastiera, otto valori — tutti
-numeri reali strettamente positivi (tranne il numero di passi, un
-intero positivo):
+Il programma richiede in sequenza, da tastiera, otto valori — tutti numeri reali strettamente positivi (tranne il numero di passi, un intero positivo):
 
 | Parametro | Significato |
 |---|---|
@@ -164,9 +154,7 @@ dell'integrale primo H (grafico inferiore).
 
 ## Risultati e loro interpretazione
 
-Le prove sono state condotte con i parametri riportati come esempio nella sezione precedente (x0 = 1200, y0 = 1000, A = 1.0, B = 0.00125, C = 0.001, D = 1.0), a cui corrisponde il punto di equilibrio (D/C, A/B) = (1000, 800).
-
-**Andamento delle popolazioni** Con dt = 0.001 e 5000 passi (t finale = 5), le prede oscillano nell'intervallo [730.4, 1270.7] e i predatori nell'intervallo [584.3, 1063.1], come atteso per un'orbita chiusa attorno al punto di equilibrio nel piano delle fasi. Prolungando la simulazione a 50000 passi (t finale = 50, circa otto periodi) si osserva che l'ampiezza dell'oscillazione resta stabile nel tempo (prede nell'intervallo [730.4, 1329.0], con l'estremo superiore leggermente più alto solo perché in una simulazione più lunga si campionano più massimi dell'orbita), confermando che la traiettoria non collassa né diverge, ma percorre ripetutamente la stessa orbita chiusa, come previsto dalla teoria per questo sistema.
+**Andamento delle popolazioni** Le prove sono state condotte con i parametri riportati come esempio nella sezione precedente (`x0 = 1200, y0 = 1000, A = 1.0, B = 0.00125, C = 0.001, D = 1.0`). Con `dt = 0.001` e `10000 passi` (t finale = 5), le prede oscillano nell'intervallo [730.4, 1270.7] e i predatori nell'intervallo [584.3, 1063.1], come atteso per un'orbita chiusa attorno al punto di equilibrio nel piano delle fasi (si veda il grafico qua sotto). 
 
 
 <img src="Simulation_normal_values.png" alt="Grafico delle popolazioni" width="450">
