@@ -4,13 +4,12 @@
 #include <istream>
 #include <string>
 
-namespace lotka_volterra
-{
+namespace lotka_volterra {
 
-    double read_positive_double(std::istream &in, std::string const &name);
+double read_positive_double(std::istream &in, std::string const &name);
 
-    int read_positive_int(std::istream &in, std::string const &name);
+int read_positive_int(std::istream &in, std::string const &name);
 
-}
+}  // namespace lotka_volterra
 
 #endif
